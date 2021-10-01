@@ -27,11 +27,11 @@ const Blog = sequelize.define('Blog', {
     allowNull: false,
   },
   ctime: { //发布时间
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   utime: { //更新时间
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
   }
 }, {

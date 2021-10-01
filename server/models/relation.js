@@ -9,4 +9,5 @@ Category.hasMany(Blog);
 Blog.belongsTo(Category);
 
 // 定义Blog与Tag的"关联关系"：多对多
-Blog.belongsToMany(Tag, { through: Blogs_Tags});
+Blog.belongsToMany(Tag, { through: Blogs_Tags });
+Tag.belongsToMany(Blog, { through: Blogs_Tags });
