@@ -32,23 +32,22 @@ async function getRandomTags() { //在已有的Category中随机选择Tags
 }
 
 (async function () {
-    // 将CategoryId和Tags注入resData中的各数据对象，再将resData批量写入数据库
+    // 将CategoryId注入resData中的各数据对象，再将resData批量写入数据库
     for (let i = 0; i < resData.length; i++) {
       const CategoryId = await getRandomCategoryId();
-      const Tags = await getRandomTags();
       resData[i].CategoryId = CategoryId;
-      resData[i].Tags = Tags;
     }
-    console.log(resData);
     await Blog.bulkCreate(resData);
     console.log('blogs: 数据添加成功！');
 
     // 更新多对多关系表blogs_tags
     let relationData = [];
     for (let i = 0; i < resData.length; i++) {
-      const { id: BlogId, Tags: TagsArr } = resData[i];
-      for (let j = 0; j < TagsArr.length; j++) {
-        const TagId = TagsArr[j];
+      const { id: BlogId } = resData[i];
+      // 随机生成Tags（值为TagId的数组），用于生成多对多关系数据relationData
+      const Tags = await getRandomTags();
+      for (let j = 0; j < Tags.length; j++) {
+        const TagId = Tags[j];
         relationData.push({ BlogId, TagId });
       }
     }
