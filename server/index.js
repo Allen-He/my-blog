@@ -1,13 +1,6 @@
-// const express = require('express');
-// const app = express();
-
-// const port = 666;
-// app.listen(port, () => {
-//     console.log(`server listen on ${port}`);
-// });
-
 require('./models/init');
 require('./mock/init');
+require('./routes/index');
 
 // const blogServ = require('./services/blogServ');
 // blogServ.getBlogsByPagination(1, 5, 'x').then(res => console.log(res));
