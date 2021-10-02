@@ -9,6 +9,8 @@
 require('./models/init');
 
 // const blogServ = require('./services/blogServ');
+// blogServ.getBlogsByPagination(1, 5, 'x').then(res => console.log(res));
+
 // blogServ.addBlog({
 //   title: '拿来吧你',
 //   from: 0,

@@ -77,3 +77,29 @@ exports.getBlogs = async function(id) {
   });
   return JSON.parse(JSON.stringify(res));
 }
+
+// 按照keyword（模糊匹配title和author）分页获取blog数据
+exports.getBlogsByPagination = async function (page = 1, limit = 10, keyword='') {
+  const res = await Blog.findAndCountAll({
+    where : {
+      [Op.or]: [
+        {
+          title : {
+            [Op.like]: `%${keyword}%`
+          }
+        },
+        {
+          author: {
+            [Op.like]: `%${keyword}%`
+          }
+        }
+      ]
+    },
+    offset: (page - 1) * limit,
+    limit: +limit
+  });
+  return {
+    total: res.count,
+    datas: JSON.parse(JSON.stringify(res.rows)),
+  }
+}
