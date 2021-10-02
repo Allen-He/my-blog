@@ -43,7 +43,7 @@ exports.getCategoryByName = async function(categoryName) {
   return res.toJSON();
 }
 
-exports.getCategories = async function(id) {
+exports.getCategories = async function() {
   const res = await Category.findAll({
     include: { model: Blog }
   });

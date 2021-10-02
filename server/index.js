@@ -7,6 +7,7 @@
 // });
 
 require('./models/init');
+require('./mock/init');
 
 // const blogServ = require('./services/blogServ');
 // blogServ.getBlogsByPagination(1, 5, 'x').then(res => console.log(res));

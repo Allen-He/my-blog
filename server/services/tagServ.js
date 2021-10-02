@@ -43,7 +43,7 @@ exports.getTagByName = async function(tagName) {
   return res.toJSON();
 }
 
-exports.getTags = async function(id) {
+exports.getTags = async function() {
   const res = await Tag.findAll({
     include: { model: Blog }
   });
