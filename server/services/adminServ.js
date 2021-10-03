@@ -1,9 +1,11 @@
+const md5 = require('md5');
 const Admin = require('../models/Admin');
 
 exports.addAdmin = async function (adminObj) {
-  const { loginId } = adminObj;
+  const { loginId, loginPwd } = adminObj;
   const res = await Admin.findOne({ where: { loginId } });
   if(!res) { //若该adminObj不存在，则添加该数据并将其返回
+    adminObj.loginPwd = md5(loginPwd); //对loginPwd进行md5加密之后，再进行添加操作
     const ins = await Admin.create(adminObj);
     return ins.toJSON();
   }
@@ -22,6 +24,7 @@ exports.updateAdmin = async function (id, adminObj) {
 
 // 登录查询
 exports.login = async function (loginId, loginPwd) {
+  loginPwd = md5(loginPwd); //对loginPwd进行md5加密之后，再查询
   const res = await Admin.findOne({
       where: {
           loginId,

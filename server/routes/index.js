@@ -4,8 +4,8 @@ const app = express();
 const staticRoot = path.resolve(__dirname, '../public');
 
 // 处理“单页应用history模式”的中间件
-const history = require('connect-history-api-fallback');
-app.use(history());
+// const history = require('connect-history-api-fallback');
+// app.use(history());
 
 // 静态资源中间件（内置）
 app.use(express.static(staticRoot));
@@ -23,9 +23,10 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 // "token处理"中间件
+app.use(require('./middleware/tokenMiddleware'));
 
 // api：使用express路由
-
+app.use('/api/admin', require('./api/admin'));
 
 // "错误处理"中间件
 app.use(require('./middleware/errorMiddleware'));
