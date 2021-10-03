@@ -3,8 +3,10 @@ const Blog = require('../models/Blog');
 const Tag = require('../models/Tag');
 const Category = require('../models/Category');
 // const Blogs_Tags_Serv = require('../services/Blogs_Tags_Serv');
+const { trimStrOfObj } = require('./util');
 
 exports.addBlog = async function(blogObj) {
+  trimStrOfObj(blogObj);
   const { title, CategoryId, Tags } = blogObj;
   const res = await Blog.findOne({ where: { title } });
   if(!res) { //若该blogObj对应的名为title的数据不存在，则添加该数据并将其返回
@@ -44,6 +46,7 @@ exports.deleteBlog = async function(id) {
 }
 
 exports.updateBlog = async function(id, blogObj) {
+  trimStrOfObj(blogObj);
   const res = await Blog.update(blogObj, { where: { id } });
   return res;
 }

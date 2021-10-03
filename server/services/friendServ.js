@@ -1,6 +1,8 @@
 const Friend = require('../models/Friend');
+const { trimStrOfObj } = require('./util');
 
 exports.addFriend = async function(friendObj) {
+  trimStrOfObj(friendObj);
   const { name } = friendObj;
   const res = await Friend.findOne({ where: { name } });
   if(!res) { //若该friendObj不存在，则添加该数据并将其返回
@@ -16,7 +18,9 @@ exports.deleteFriend = async function(id) {
 }
 
 exports.updateFriend = async function(id, friendObj) {
+  trimStrOfObj(friendObj);
   const res = await Friend.update(friendObj, { where: { id } });
+  return res;
 }
 
 exports.getFriendById = async function(id) {

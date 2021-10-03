@@ -1,8 +1,10 @@
 const Blog = require('../models/Blog');
 const Tag = require('../models/Tag');
 const Blogs_Tags = require('../models/Blogs_Tags');
+const { trimStrOfObj } = require('./util');
 
 exports.addRelation = async function(idObj) {
+  trimStrOfObj(idObj);
   const { BlogId, TagId } = idObj;
   const res = await Blogs_Tags.findOne({ where: idObj });
   if(!res) { //若该idObj不存在，则添加该数据并将其返回

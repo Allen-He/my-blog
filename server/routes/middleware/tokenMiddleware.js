@@ -2,10 +2,11 @@ const { pathToRegexp } = require("path-to-regexp");
 const jwt = require('../util/jwt');
 const { getErr } = require('../util/sendRes');
 
+// TODO: 该名单待完善
 const needTokenApi = [ //method的值必须大写
   {method: 'GET', path: '/api/admin/whoami'},
-  {method: 'POST', path: '/api/blogs'},
-  {method: 'PUT', path: '/api/blogs/:id'}
+  // {method: 'POST', path: '/api/blogs'},
+  // {method: 'PUT', path: '/api/blogs/:id'}
 ]
 
 module.exports = function(req, res, next) {

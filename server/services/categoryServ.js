@@ -1,7 +1,9 @@
 const Category = require('../models/Category');
 const Blog = require('../models/Blog');
+const { trimStrOfObj } = require('./util');
 
 exports.addCategory = async function(categoryObj) {
+  trimStrOfObj(categoryObj);
   const { categoryName } = categoryObj;
   const res = await Category.findOne({ where: { categoryName } });
   if(!res) { //若该categoryObj不存在，则添加该数据并将其返回
@@ -17,7 +19,9 @@ exports.deleteCategory = async function(id) {
 }
 
 exports.updateCategory = async function(id, categoryObj) {
+  trimStrOfObj(categoryObj);
   const res = await Category.update(categoryObj, { where: { id } });
+  return res;
 }
 
 exports.getCategoryById = async function(id) {
@@ -45,7 +49,7 @@ exports.getCategoryByName = async function(categoryName) {
 
 exports.getCategories = async function() {
   const res = await Category.findAll({
-    include: { model: Blog }
+    include: { model: Blog, attributes: ['id'] }
   });
   return JSON.parse(JSON.stringify(res));
 }

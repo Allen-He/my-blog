@@ -1,9 +1,11 @@
 const Tag = require('../models/Tag');
 const Blog = require('../models/Blog');
+const { trimStrOfObj } = require('./util');
 
 exports.addTag = async function(tagObj) {
-  const { TagName } = tagObj;
-  const res = await Tag.findOne({ where: { TagName } });
+  trimStrOfObj(tagObj);
+  const { tagName } = tagObj;
+  const res = await Tag.findOne({ where: { tagName } });
   if(!res) { //若该tagObj不存在，则添加该数据并将其返回
     const ins = await Tag.create(tagObj);
     return ins.toJSON();
@@ -17,7 +19,9 @@ exports.deleteTag = async function(id) {
 }
 
 exports.updateTag = async function(id, tagObj) {
+  trimStrOfObj(tagObj);
   const res = await Tag.update(tagObj, { where: { id } });
+  return res;
 }
 
 exports.getTagById = async function(id) {
@@ -45,7 +49,7 @@ exports.getTagByName = async function(tagName) {
 
 exports.getTags = async function() {
   const res = await Tag.findAll({
-    include: { model: Blog }
+    include: { model: Blog, attributes: ['id'] }
   });
   return JSON.parse(JSON.stringify(res));
 }
