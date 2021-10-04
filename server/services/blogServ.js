@@ -2,7 +2,7 @@ const { Op } = require('sequelize');
 const Blog = require('../models/Blog');
 const Tag = require('../models/Tag');
 const Category = require('../models/Category');
-// const Blogs_Tags_Serv = require('../services/Blogs_Tags_Serv');
+const Blogs_Tags_Serv = require('../services/Blogs_Tags_Serv');
 const { trimStrOfObj } = require('./util');
 
 exports.addBlog = async function(blogObj) {
@@ -26,8 +26,6 @@ exports.addBlog = async function(blogObj) {
         const incorrectTags = Tags.filter((ele) => !correctTags.includes(ele));
         if(incorrectTags.length !== 0) {
           throw new Error('属性Tags的值中，存在不合法的id（类型为number，对应的tag已存在）');
-        }else {
-          //TODO: 若Tags合法，则更新多对多关系表blogs_tags
         }
         delete blogObj.Tags;
       }else {
@@ -35,7 +33,19 @@ exports.addBlog = async function(blogObj) {
       }
     }
     const ins = await Blog.create(blogObj);
-    return ins.toJSON();
+    const insData = ins.toJSON();
+    if(insData) { 
+      // 若当前blogObj成功添加到数据库中，并且Tags合法，则及时更新多对多关系表blogs_tags
+      const { id: curBlogId } = insData;
+      console.log(curBlogId, Tags);
+      for (let i = 0; i < Tags.length; i++) {
+        await Blogs_Tags_Serv.addRelation({
+          BlogId: curBlogId,
+          TagId: Tags[i]
+        });
+      }
+    }
+    return insData;
   }
   return null; //若该blogObj已存在，则返回null
 }

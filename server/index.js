@@ -14,10 +14,10 @@ require('./routes/index');
 // blogServ.getBlogsByPagination(1, 5, 'x').then(res => console.log(res));
 
 // blogServ.addBlog({
-//   title: '拿来吧你',
+//   title: 'NEW TEST 666',
 //   from: 0,
 //   author: 'Allen_He',
-//   content: 'cssdfasddsfsdfdsfsdsdfdvssdgewfwef',
+//   content: 'cssggdfasdfdsfdsvxxxfd',
 //   views: 0,
 //   likes: 0,
 //   ctime: Date.now(),
