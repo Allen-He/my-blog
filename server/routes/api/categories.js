@@ -27,21 +27,15 @@ router.post('/', asyncHandler(async (req, res, next) => {
 }));
 
 // 修改单个category（修改成功返回1，失败返回0）
-router.put('/', asyncHandler(async (req, res, next) => {
-  const { id, categoryObj = null } = req.body;
-  if(!id || !categoryObj || !categoryObj.categoryName) {
-    throw new Error('未按接口文档传入参数');
-  }
-  const data = await categoryServ.updateCategory(id, categoryObj);
-  return data;
+router.put('/:id', asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+  const data = await categoryServ.updateCategory(id, req.body);
+  return data[0];
 }));
 
 // 删除单个category（删除成功返回1，失败返回0）
-router.delete('/', asyncHandler(async (req, res, next) => {
-  const { id } = req.body;
-  if(!id) {
-    throw new Error('未按接口文档传入参数');
-  }
+router.delete('/:id', asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
   const data = await categoryServ.deleteCategory(id);
   return data;
 }));

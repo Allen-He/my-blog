@@ -2,11 +2,26 @@ const { pathToRegexp } = require("path-to-regexp");
 const jwt = require('../util/jwt');
 const { getErr } = require('../util/sendRes');
 
-// TODO: 该名单待完善
+// 需要附带token的请求白名单
 const needTokenApi = [ //method的值必须大写
+  // admin相关
   {method: 'GET', path: '/api/admin/whoami'},
-  // {method: 'POST', path: '/api/blogs'},
-  // {method: 'PUT', path: '/api/blogs/:id'}
+  // blog相关
+  {method: 'POST', path: '/api/blogs'},
+  {method: 'PUT', path: '/api/blogs/:id'},
+  {method: 'DELETE', path: '/api/blogs/:id'},
+  // ctegories相关
+  {method: 'POST', path: '/api/categories'},
+  {method: 'PUT', path: '/api/categories/:id'},
+  {method: 'DELETE', path: '/api/categories/:id'},
+  // tags相关
+  {method: 'POST', path: '/api/tags'},
+  {method: 'PUT', path: '/api/tags/:id'},
+  {method: 'DELETE', path: '/api/tags/:id'},
+  // friends相关
+  {method: 'POST', path: '/api/friends'},
+  {method: 'PUT', path: '/api/friends/:id'},
+  {method: 'DELETE', path: '/api/friends/:id'},
 ]
 
 module.exports = function(req, res, next) {

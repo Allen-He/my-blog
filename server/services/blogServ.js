@@ -37,7 +37,6 @@ exports.addBlog = async function(blogObj) {
     if(insData) { 
       // 若当前blogObj成功添加到数据库中，并且Tags合法，则及时更新多对多关系表blogs_tags
       const { id: curBlogId } = insData;
-      console.log(curBlogId, Tags);
       for (let i = 0; i < Tags.length; i++) {
         await Blogs_Tags_Serv.addRelation({
           BlogId: curBlogId,

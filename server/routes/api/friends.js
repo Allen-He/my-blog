@@ -28,20 +28,14 @@ router.post('/', asyncHandler(async (req, res, next) => {
 
 // 修改单个friend（修改成功返回1，失败返回0）
 router.put('/', asyncHandler(async (req, res, next) => {
-  const { id, friendObj = null } = req.body;
-  if(!id || !friendObj || !friendObj.name || !friendObj.link || !friendObj.desc || !friendObj.iconLink) {
-    throw new Error('未按接口文档传入参数');
-  }
-  const data = await friendServ.updateFriend(id, friendObj);
-  return data;
+  const { id } = req.params;
+  const data = await friendServ.updateFriend(id, req.body);
+  return data[0];
 }));
 
 // 删除单个friend（删除成功返回1，失败返回0）
 router.delete('/', asyncHandler(async (req, res, next) => {
-  const { id } = req.body;
-  if(!id) {
-    throw new Error('未按接口文档传入参数');
-  }
+  const { id } = req.params;
   const data = await friendServ.deleteFriend(id);
   return data;
 }));

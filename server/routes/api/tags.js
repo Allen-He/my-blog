@@ -27,21 +27,15 @@ router.post('/', asyncHandler(async (req, res, next) => {
 }));
 
 // 修改单个tag（修改成功返回1，失败返回0）
-router.put('/', asyncHandler(async (req, res, next) => {
-  const { id, tagObj = null } = req.body;
-  if(!id || !tagObj || !tagObj.tagName) {
-    throw new Error('未按接口文档传入参数');
-  }
-  const data = await tagServ.updateTag(id, tagObj);
-  return data;
+router.put('/:id', asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+  const data = await tagServ.updateTag(id, req.body);
+  return data[0];
 }));
 
 // 删除单个tag（删除成功返回1，失败返回0）
-router.delete('/', asyncHandler(async (req, res, next) => {
-  const { id } = req.body;
-  if(!id) {
-    throw new Error('未按接口文档传入参数');
-  }
+router.delete('/:id', asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
   const data = await tagServ.deleteTag(id);
   return data;
 }));

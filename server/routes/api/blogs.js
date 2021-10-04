@@ -47,22 +47,16 @@ router.post('/', asyncHandler(async (req, res, next) => {
 }));
 
 // 修改单个blog（修改成功返回1，失败返回0）
-router.put('/', asyncHandler(async (req, res, next) => {
-  const { id, blogObj = null } = req.body;
-  if(!id || !blogObj) {
-    throw new Error('未按接口文档传入参数');
-  }
-  blogObj.utime = Date.now() + ''; //更新utime字段
-  const data = await blogServ.updateBlog(id, blogObj);
-  return data;
+router.put('/:id', asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+  req.body.utime = Date.now() + ''; //更新utime字段
+  const data = await blogServ.updateBlog(id, req.body);
+  return data[0];
 }));
 
 // 删除单个blog（删除成功返回1，失败返回0）
-router.delete('/', asyncHandler(async (req, res, next) => {
-  const { id } = req.body;
-  if(!id) {
-    throw new Error('未按接口文档传入参数');
-  }
+router.delete('/:id', asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
   const data = await blogServ.deleteBlog(id);
   return data;
 }));
