@@ -26,7 +26,7 @@ exports.updateCategory = async function(id, categoryObj) {
 
 exports.getCategoryById = async function(id) {
   const res = await Category.findByPk(id, {
-    include: { model: Blog }
+    include: { model: Blog, attributes: ['id', 'title', 'from', 'author', 'views', 'likes', 'ctime', 'utime', 'CategoryId'] }
   });
   if(res) {
     return res.toJSON();

@@ -26,7 +26,7 @@ exports.updateTag = async function(id, tagObj) {
 
 exports.getTagById = async function(id) {
   const res = await Tag.findByPk(id, {
-    include: { model: Blog }
+    include: { model: Blog, attributes: ['id', 'title', 'from', 'author', 'views', 'likes', 'ctime', 'utime', 'CategoryId'] }
   });
   if(res) {
     return res.toJSON();
