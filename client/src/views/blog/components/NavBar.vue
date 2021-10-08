@@ -63,10 +63,11 @@ export default {
 
 <style lang="less" scoped>
 .navBar{
-  width: 100vw;
+  width: 100%;
   min-width: 900px;
   height: 58px;
   padding: 0px 24px;
+  box-sizing: border-box;
   background-color: #fff;
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);;
   position: fixed;
