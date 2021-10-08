@@ -12,15 +12,9 @@
         <i class="iconfont">&#xe8b9;</i>
         <input type="text" placeholder="标题 or 作者">
       </div>
-      <NavItem title="主页" @click="$router.push({name: 'Index'})">
-        <i class="iconfont">&#xe613;</i>
-      </NavItem>
-      <NavItem title="分类" @click="$router.push({name: 'Categories'})">
-        <i class="iconfont">&#xe669;</i>
-      </NavItem>
-      <NavItem title="留言板" @click="$router.push({name: 'Message'})">
-        <i class="iconfont">&#xe604;</i>
-      </NavItem>
+      <NavItem title="主页" iconCode="&#xe613;" @click="$router.push({name: 'Index'})" />
+      <NavItem title="分类" iconCode="&#xe669;" @click="$router.push({name: 'Categories'})" />
+      <NavItem title="留言板" iconCode="&#xe604;" @click="$router.push({name: 'Message'})" />
       <NavItem title="快速导航" :isDrop="true">
         <template v-slot:dropMenu>
           <ul class="dropMenu">
@@ -39,9 +33,7 @@
           </ul>
         </template>
       </NavItem>
-      <NavItem title="关于我" @click="$router.push({name: 'About'})">
-        <i class="iconfont">&#xeca6;</i>
-      </NavItem>
+      <NavItem title="关于我" iconCode="&#xeca6;" @click="$router.push({name: 'About'})" />
     </div>
   </header>
 </template>

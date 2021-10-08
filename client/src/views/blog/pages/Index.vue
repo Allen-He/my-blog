@@ -25,8 +25,15 @@
               </div>
             </div>
           </div>
-          <div class="categoriesBox">种类</div>
-          <div class="tagsBox">标签</div>
+          <div class="categoriesBox">
+            <SectionTitle title="Categories" iconCode="&#xe669;" />
+          </div>
+          <div class="tagsBox">
+            <SectionTitle title="Tags" iconCode="&#xe605;" />
+          </div>
+          <div class="friendsBox">
+            <SectionTitle title="Friendly Links" iconCode="&#xe63e;" />
+          </div>
         </div>
       </div>
     </div>
@@ -35,10 +42,12 @@
 </template>
 
 <script>
+import SectionTitle from '../components/SectionTitle.vue';
 import FooterBar from '../components/FooterBar.vue';
 
 export default {
   components: {
+    SectionTitle,
     FooterBar,
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <div class="navItem" @click="$emit('click')">
     <div class="itemWrap">
-      <slot></slot>
+      <i class="iconfont" v-html="iconCode"></i>
       <div class="title">{{ title }}</div>
       <i v-if="isDrop" class="iconfont arrow">&#xe60a;</i>
     </div>
@@ -21,6 +21,10 @@
 export default {
   props: {
     title: {
+      type: String,
+      default: '',
+    },
+    iconCode: {
       type: String,
       default: '',
     },
