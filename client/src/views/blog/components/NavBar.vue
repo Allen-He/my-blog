@@ -13,7 +13,9 @@
         <input type="text" placeholder="标题 or 作者">
       </div>
       <NavItem title="主页" iconCode="&#xe613;" @click="$router.push({name: 'Index'})" />
-      <NavItem title="分类" iconCode="&#xe669;" @click="$router.push({name: 'Categories'})" />
+      <NavItem title="分类" iconCode="&#xe669;"
+        @click="$router.push({name: 'Categories', params: { id: 'all' }})"
+      />
       <NavItem title="留言板" iconCode="&#xe604;" @click="$router.push({name: 'Message'})" />
       <NavItem title="快速导航" :isDrop="true">
         <template v-slot:dropMenu>

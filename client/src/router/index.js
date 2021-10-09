@@ -21,12 +21,12 @@ const routes = [
         component: () => import('../views/blog/pages/Index.vue'),
       },
       {
-        path: 'categories',
+        path: 'categories/:id',
         name: 'Categories',
         component: () => import('../views/blog/pages/Categories.vue'),
       },
       {
-        path: 'tags',
+        path: 'tags/:id',
         name: 'Tags',
         component: () => import('../views/blog/pages/Tags.vue'),
       },

@@ -27,12 +27,15 @@
           </div>
           <div class="categoriesBox">
             <SectionTitle title="Categories" iconCode="&#xe669;" />
+            <CategoryPanel v-if="categoryArr" :categoryArr="categoryArr" />
           </div>
           <div class="tagsBox">
             <SectionTitle title="Tags" iconCode="&#xe605;" />
+            <TagPanel v-if="tagArr" :tagArr="tagArr" />
           </div>
           <div class="friendsBox">
             <SectionTitle title="Friendly Links" iconCode="&#xe63e;" />
+            <FriendPanel v-if="friendArr" :friendArr="friendArr" />
           </div>
         </div>
       </div>
@@ -42,13 +45,58 @@
 </template>
 
 <script>
+import blogApi from '@/request/blogApi';
 import SectionTitle from '../components/SectionTitle.vue';
+import CategoryPanel from '../components/CategoryPanel.vue';
+import TagPanel from '../components/TagPanel.vue';
+import FriendPanel from '../components/FriendPanel.vue';
 import FooterBar from '../components/FooterBar.vue';
 
 export default {
   components: {
     SectionTitle,
+    CategoryPanel,
+    TagPanel,
+    FriendPanel,
     FooterBar,
+  },
+  data() {
+    return {
+      categoryArr: null,
+      tagArr: null,
+      friendArr: null,
+    };
+  },
+  methods: {
+    async getCategories() {
+      const data = await blogApi.getCategories();
+      this.categoryArr = data.map((item) => ({
+        id: item.id,
+        categoryName: item.categoryName,
+        blogsNum: item.Blogs.length,
+      }));
+    },
+    async getTags() {
+      const data = await blogApi.getTags();
+      this.tagArr = data.map((item) => ({
+        id: item.id,
+        tagName: item.tagName,
+        blogsNum: item.Blogs.length,
+      }));
+    },
+    async getFriends() {
+      const data = await blogApi.getFriends();
+      this.friendArr = data.map((item) => ({
+        id: item.id,
+        name: item.name,
+        link: item.link,
+      }));
+    },
+  },
+  async created() {
+    this.getCategories();
+    this.getTags();
+    this.getFriends();
   },
 };
 </script>
@@ -147,6 +195,10 @@ export default {
               background-color: #242424;
             }
           }
+        }
+        .categoriesBox,
+        .tagsBox {
+          margin-bottom: 20px;
         }
       }
 
