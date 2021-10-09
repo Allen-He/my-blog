@@ -31,6 +31,11 @@ const routes = [
         component: () => import('../views/blog/pages/Tags.vue'),
       },
       {
+        path: 'blogs/:id',
+        name: 'BlogsDetail',
+        component: () => import('../views/blog/pages/BlogsDetail.vue'),
+      },
+      {
         path: 'about',
         name: 'About',
         component: () => import('../views/blog/pages/About.vue'),

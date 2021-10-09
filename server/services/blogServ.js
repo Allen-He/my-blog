@@ -110,6 +110,8 @@ exports.getBlogsByPagination = async function (page = 1, limit = 10, keyword='')
         }
       ]
     },
+    include: { model: Tag, attributes: ['id', 'tagName'] },
+    attributes: ['id', 'title', 'from', 'author', 'ctime', 'CategoryId'],
     offset: (page - 1) * limit,
     limit: +limit
   });

@@ -8,19 +8,31 @@
     </div>
     <div class="contentBox">
       <div class="content">
-        <div class="blogBox">博客内容</div>
+        <div class="blogBox">
+          <BlogTitleList v-if="curBlogsArr" :blogsArr="curBlogsArr" />
+          <a-pagination
+            style="textAlign: center"
+            show-quick-jumper
+            :default-current="1"
+            :current="currentPage"
+            :pageSize="10"
+            :total="blogsTotalNum"
+            :hideOnSinglePage="true"
+            @change="onChange"
+          />
+        </div>
         <div class="infoBox">
           <div class="info">
             <img class="avator" src="~@/assets/logo.png" alt="" />
             <h3 class="name">而已</h3>
             <div class="nums">
               <div class="numsItem">
-                <span class="num">80</span>
+                <span class="num">{{ blogsNum }}</span>
                 <span class="text">Article</span>
               </div>
               <div class="split"></div>
               <div class="numsItem">
-                <span class="num">36</span>
+                <span class="num">{{ tagsNum }}</span>
                 <span class="text">Tag</span>
               </div>
             </div>
@@ -47,6 +59,7 @@
 <script>
 import blogApi from '@/request/blogApi';
 import SectionTitle from '../components/SectionTitle.vue';
+import BlogTitleList from '../components/BlogTitleList.vue';
 import CategoryPanel from '../components/CategoryPanel.vue';
 import TagPanel from '../components/TagPanel.vue';
 import FriendPanel from '../components/FriendPanel.vue';
@@ -55,6 +68,7 @@ import FooterBar from '../components/FooterBar.vue';
 export default {
   components: {
     SectionTitle,
+    BlogTitleList,
     CategoryPanel,
     TagPanel,
     FriendPanel,
@@ -62,12 +76,34 @@ export default {
   },
   data() {
     return {
+      curBlogsArr: null,
+      blogsTotalNum: 0,
+      currentPage: 1,
       categoryArr: null,
       tagArr: null,
       friendArr: null,
     };
   },
+  computed: {
+    tagsNum() {
+      return this.tagArr ? this.tagArr.length : 0;
+    },
+    blogsNum() {
+      return this.blogsTotalNum;
+    },
+  },
   methods: {
+    onChange(page) {
+      this.currentPage = page;
+      this.getBlogsAndTotal(page);
+    },
+    async getBlogsAndTotal(page) {
+      const data = await blogApi.getBlogs(page);
+      this.curBlogsArr = data.datas;
+      this.blogsTotalNum = data.total;
+      console.log(this.curBlogsArr);
+      console.log(this.blogsTotalNum);
+    },
     async getCategories() {
       const data = await blogApi.getCategories();
       this.categoryArr = data.map((item) => ({
@@ -97,6 +133,7 @@ export default {
     this.getCategories();
     this.getTags();
     this.getFriends();
+    this.getBlogsAndTotal();
   },
 };
 </script>
@@ -182,10 +219,14 @@ export default {
               flex-direction: column;
               align-items: center;
               .num {
+                height: 19px;
+                line-height: 19px;
                 font-size: 19px;
                 margin-bottom: 10px;
               }
               .text {
+                height: 12px;
+                line-height: 12px;
                 font-size: 12px;
               }
             }
@@ -205,7 +246,7 @@ export default {
       .blogBox {
         flex: 0 1 auto;
         width: 810px;
-        box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
+        // box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
       }
     }
   }
