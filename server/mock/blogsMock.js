@@ -5,9 +5,9 @@ const categoryServ = require('../services/categoryServ');
 const TagServ = require('../services/tagServ');
 
 const resData = Mock.mock({
-    "data|10": [{
+    "data|35": [{
         "id|+1": 1,
-        "title": "@ctitle(1,8)",
+        "title": "@ctitle(5,10)",
         "from": "@boolean",
         "author": "@cname",
         "content": "@cparagraph(15, 20)",

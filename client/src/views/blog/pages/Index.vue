@@ -9,16 +9,11 @@
     <div class="contentBox">
       <div class="content">
         <div class="blogBox">
-          <BlogTitleList v-if="curBlogsArr" :blogsArr="curBlogsArr" />
-          <a-pagination
-            style="textAlign: center"
-            show-quick-jumper
-            :default-current="1"
-            :current="currentPage"
-            :pageSize="10"
-            :total="blogsTotalNum"
-            :hideOnSinglePage="true"
-            @change="onChange"
+          <BlogTitleList
+            v-if="curBlogsArr"
+            :blogsArr="curBlogsArr"
+            :blogsTotalNum="blogsTotalNum"
+            @pageChange="onPageChange"
           />
         </div>
         <div class="infoBox">
@@ -78,7 +73,6 @@ export default {
     return {
       curBlogsArr: null,
       blogsTotalNum: 0,
-      currentPage: 1,
       categoryArr: null,
       tagArr: null,
       friendArr: null,
@@ -93,8 +87,7 @@ export default {
     },
   },
   methods: {
-    onChange(page) {
-      this.currentPage = page;
+    onPageChange({ page }) {
       this.getBlogsAndTotal(page);
     },
     async getBlogsAndTotal(page) {

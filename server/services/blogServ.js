@@ -113,7 +113,9 @@ exports.getBlogsByPagination = async function (page = 1, limit = 10, keyword='')
     include: { model: Tag, attributes: ['id', 'tagName'] },
     attributes: ['id', 'title', 'from', 'author', 'ctime', 'CategoryId'],
     offset: (page - 1) * limit,
-    limit: +limit
+    limit: +limit,
+    order: [['ctime', 'desc']], //按照ctime降序排列（最近创建的在前）
+    distinct: true, //去重，返回的 count 会把 include 的数量算进去
   });
   return {
     total: res.count,

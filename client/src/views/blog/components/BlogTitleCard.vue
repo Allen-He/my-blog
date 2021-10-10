@@ -49,7 +49,7 @@ export default {
       return this.Tags.slice(0, 3);
     },
     localCTime() {
-      return new Date(this.ctime).toLocaleString();
+      return new Date(+this.ctime).toLocaleString();
     },
   },
   methods: {
