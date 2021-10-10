@@ -1,5 +1,6 @@
 const Category = require('../models/Category');
 const Blog = require('../models/Blog');
+const Tag = require('../models/Tag');
 const { trimStrOfObj } = require('./util');
 
 exports.addCategory = async function(categoryObj) {
@@ -26,7 +27,12 @@ exports.updateCategory = async function(id, categoryObj) {
 
 exports.getCategoryById = async function(id) {
   const res = await Category.findByPk(id, {
-    include: { model: Blog, attributes: ['id', 'title', 'from', 'author', 'views', 'likes', 'ctime', 'utime', 'CategoryId'] }
+    include: {
+      model: Blog,
+      attributes: ['id', 'title', 'from', 'author', 'views', 'likes', 'ctime', 'utime', 'CategoryId'],
+      order: [['ctime', 'desc']], //按照ctime降序排列（最近创建的在前）
+      include: { model: Tag, attributes: ['id', 'tagName'] },
+    }
   });
   if(res) {
     return res.toJSON();

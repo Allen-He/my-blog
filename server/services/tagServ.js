@@ -26,7 +26,12 @@ exports.updateTag = async function(id, tagObj) {
 
 exports.getTagById = async function(id) {
   const res = await Tag.findByPk(id, {
-    include: { model: Blog, attributes: ['id', 'title', 'from', 'author', 'views', 'likes', 'ctime', 'utime', 'CategoryId'] }
+    include: {
+      model: Blog,
+      attributes: ['id', 'title', 'from', 'author', 'views', 'likes', 'ctime', 'utime', 'CategoryId'],
+      order: [['ctime', 'desc']], //按照ctime降序排列（最近创建的在前）
+      include: { model: Tag, attributes: ['id', 'tagName'] },
+    }
   });
   if(res) {
     return res.toJSON();
