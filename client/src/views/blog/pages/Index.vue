@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import blogApi from '@/request/blogApi';
 import SectionTitle from '../components/SectionTitle.vue';
 import BlogTitleList from '../components/BlogTitleList.vue';
@@ -73,12 +74,10 @@ export default {
     return {
       curBlogsArr: null,
       blogsTotalNum: 0,
-      categoryArr: null,
-      tagArr: null,
-      friendArr: null,
     };
   },
   computed: {
+    ...mapState(['categoryArr', 'tagArr', 'friendArr']),
     tagsNum() {
       return this.tagArr ? this.tagArr.length : 0;
     },
@@ -87,6 +86,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['setCategoryArr', 'setTagArr', 'setFriendArr']),
     onPageChange({ page }) {
       this.getBlogsAndTotal(page);
     },
@@ -94,38 +94,12 @@ export default {
       const data = await blogApi.getBlogs(page);
       this.curBlogsArr = data.datas;
       this.blogsTotalNum = data.total;
-      console.log(this.curBlogsArr);
-      console.log(this.blogsTotalNum);
-    },
-    async getCategories() {
-      const data = await blogApi.getCategories();
-      this.categoryArr = data.map((item) => ({
-        id: item.id,
-        categoryName: item.categoryName,
-        blogsNum: item.Blogs.length,
-      }));
-    },
-    async getTags() {
-      const data = await blogApi.getTags();
-      this.tagArr = data.map((item) => ({
-        id: item.id,
-        tagName: item.tagName,
-        blogsNum: item.Blogs.length,
-      }));
-    },
-    async getFriends() {
-      const data = await blogApi.getFriends();
-      this.friendArr = data.map((item) => ({
-        id: item.id,
-        name: item.name,
-        link: item.link,
-      }));
     },
   },
-  async created() {
-    this.getCategories();
-    this.getTags();
-    this.getFriends();
+  created() {
+    this.setCategoryArr();
+    this.setTagArr();
+    this.setFriendArr();
     this.getBlogsAndTotal();
   },
 };
