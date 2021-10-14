@@ -1,10 +1,10 @@
 <template>
-  <ul class="categoryCard" @click="clickHandle">
+  <div class="categoryCard" @click="clickHandle">
     <span class="name">{{ categoryName }}</span>
     <div class="num" :style="{ backgroundColor: numBgColor }">
       <span>{{ blogsNum }}</span>
     </div>
-  </ul>
+  </div>
 </template>
 
 <script>
@@ -42,7 +42,6 @@ export default {
 
 <style lang="less" scoped>
 .categoryCard {
-  width: 100%;
   height: 45px;
   padding: 6px 12px;
   border-radius: 4px;
@@ -57,6 +56,7 @@ export default {
   .name {
     font-size: 15px;
     color: #242424;
+    margin-right: 6px;
   }
   .num {
     width: 25px;

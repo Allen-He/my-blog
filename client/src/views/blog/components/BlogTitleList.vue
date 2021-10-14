@@ -11,7 +11,7 @@
       style="textAlign: center"
       show-quick-jumper
       :current="currentPage"
-      :pageSize="10"
+      :pageSize="pageSize"
       :total="blogsTotalNum"
       :hideOnSinglePage="true"
       @change="onChange"
@@ -34,6 +34,10 @@ export default {
     blogsTotalNum: {
       type: Number,
       require: true,
+    },
+    pageSize: {
+      type: Number,
+      default: 10,
     },
   },
   data() {
