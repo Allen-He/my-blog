@@ -91,7 +91,7 @@ export default {
       this.getBlogsAndTotal(page);
     },
     async getBlogsAndTotal(page) {
-      const data = await blogApi.getBlogs(page);
+      const data = await blogApi.getBlogsByPagination(page);
       this.curBlogsArr = data.datas;
       this.blogsTotalNum = data.total;
     },

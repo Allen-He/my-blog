@@ -86,9 +86,12 @@ exports.getBlogByTitle = async function(title) {
   return JSON.parse(JSON.stringify(res));
 }
 
-exports.getBlogs = async function(id) {
+exports.getBlogs = async function() {
   const res = await Blog.findAll({
-    include: { model: Tag }
+    include: { model: Tag, attributes: ['id', 'tagName'] },
+    attributes: ['id', 'title', 'from', 'author', 'ctime', 'CategoryId'],
+    order: [['ctime', 'desc']], //按照ctime降序排列（最近创建的在前）
+    distinct: true, //去重，返回的 count 会把 include 的数量算进去
   });
   return JSON.parse(JSON.stringify(res));
 }

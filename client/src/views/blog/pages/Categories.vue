@@ -54,7 +54,12 @@ export default {
     ...mapActions(['setCategoryArr']),
     async updateBlogsData() {
       try {
-        const data = await blogApi.getBlogsByCategoryId(this.categoryId);
+        let data = null;
+        if (this.categoryId === 'all') { // 即：不限分类
+          data = await blogApi.getBlogs();
+        } else { // 即：限制分类
+          data = await blogApi.getBlogsByCategoryId(this.categoryId);
+        }
         this.curBlogsArr = data;
         this.blogsTotalNum = data.length;
       } catch (err) {

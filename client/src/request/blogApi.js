@@ -1,7 +1,7 @@
 import axios from './request';
 
 const api = {
-  async getBlogs(page = 1, limit = 10, keyword = '') {
+  async getBlogsByPagination(page = 1, limit = 10, keyword = '') {
     const res = await axios.get('/api/blogs', {
       params: {
         page, // 当前页码
@@ -9,6 +9,10 @@ const api = {
         keyword, // 检索关键词（标题or作者）
       },
     });
+    return res;
+  },
+  async getBlogs() {
+    const res = await axios.get('/api/blogs/all');
     return res;
   },
   async getCategories() {

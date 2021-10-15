@@ -11,6 +11,12 @@ router.get('/', asyncHandler(async (req, res, next) => {
   return data;
 }));
 
+// 获取所有blog数据
+router.get('/all', asyncHandler(async (req, res, next) => {
+  const data = await blogServ.getBlogs();
+  return data;
+}));
+
 // 查询单个blog（根据id）
 router.get('/:id', asyncHandler(async (req, res, next) => {
   const { id } = req.params;
