@@ -73,15 +73,25 @@ exports.getBlogById = async function(id) {
   return null;
 }
 
-// 模糊匹配title字段
-exports.getBlogByTitle = async function(title) {
+// 模糊匹配title和author字段
+exports.searchBlogByTitleOrAuthor = async function(keyword) {
   const res = await Blog.findAll({
-    where: { 
-      title: { 
-        [Op.like]: `%${title}%` 
-      } 
-    }, 
-    include: { model: Tag }
+    where : {
+      [Op.or]: [
+        {
+          title : {
+            [Op.like]: `%${keyword}%`
+          }
+        },
+        {
+          author: {
+            [Op.like]: `%${keyword}%`
+          }
+        }
+      ]
+    },
+    attributes: ['id', 'title', 'from', 'author'],
+    order: [['ctime', 'desc']], //按照ctime降序排列（最近创建的在前）
   });
   return JSON.parse(JSON.stringify(res));
 }

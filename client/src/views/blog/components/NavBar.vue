@@ -2,7 +2,7 @@
   <header class="navBar">
     <a class="left" href="/">
       <img class="logo" src="@/assets/logo.png" alt="">
-      <span class="siteName">而已的博客</span>
+      <span class="siteName">{{ websiteTitle }}</span>
     </a>
     <div class="right">
       <div class="themeBox">
@@ -10,7 +10,17 @@
       </div>
       <div class="searchBox">
         <i class="iconfont">&#xe8b9;</i>
-        <input type="text" placeholder="标题 or 作者">
+        <input
+          type="text"
+          placeholder="标题 or 作者"
+          v-model.trim="searchVal"
+          @input="searchBlogsHandle"
+        >
+        <SearchPanel
+          v-if="showSearchPanel"
+          :titleArr="titleArr"
+          @onClick="searchItemClickHandle"
+        />
       </div>
       <NavItem title="主页" iconCode="&#xe613;" @click="$router.push({name: 'Index'})" />
       <NavItem title="分类" iconCode="&#xe669;"
@@ -41,16 +51,56 @@
 </template>
 
 <script>
+import blogApi from '@/request/blogApi';
 import NavItem from './NavItem.vue';
+import SearchPanel from './SearchPanel.vue';
 
 export default {
   components: {
     NavItem,
+    SearchPanel,
   },
   data() {
     return {
-      websiteTitle: 'sdf',
+      websiteTitle: '而已的博客',
+      searchVal: '',
+      titleArr: null,
+      lastTime: 0, // 为搜索框的输入做“节流”处理
     };
+  },
+  computed: {
+    showSearchPanel() {
+      return this.titleArr;
+    },
+  },
+  methods: {
+    async searchBlogsHandle() {
+      const { searchVal, lastTime } = this;
+      if (searchVal === '') { // 如果为空，则重置titleArr，且不做后续处理
+        this.titleArr = null;
+        return;
+      }
+      // 为搜索框的输入做“节流”处理
+      const nowTime = Date.now();
+      if (nowTime - lastTime > 300) {
+        let resArr = await blogApi.searchByTitleOrAuthor(searchVal);
+        resArr = resArr.map((item) => ({
+          ...item,
+          title: this.replaceTargetVal(item.title, searchVal),
+          author: this.replaceTargetVal(item.author, searchVal),
+        }));
+        this.titleArr = resArr;
+        this.lastTime = nowTime;
+      }
+    },
+    /** 为originVal中的targetVal增添样式并返回 */
+    replaceTargetVal(originVal, targetVal) {
+      return originVal.replace(targetVal, `<span style="color: #3eaf7c">${targetVal}</span>`);
+    },
+    searchItemClickHandle() {
+      this.titleArr = null; // 点击搜索结果项后，重置titleArr，以隐藏searchpanel面板
+      this.searchVal = '';
+    },
   },
 };
 </script>

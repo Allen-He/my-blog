@@ -32,6 +32,7 @@ app.use('/api/categories', require('./api/categories'));
 app.use('/api/tags', require('./api/tags'));
 app.use('/api/friends', require('./api/friends'));
 app.use('/api/blogs', require('./api/blogs'));
+app.use('/api/search', require('./api/search'));
 
 // "错误处理"中间件
 app.use(require('./middleware/errorMiddleware'));

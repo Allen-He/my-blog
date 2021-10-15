@@ -35,6 +35,12 @@ const api = {
     const res = await axios.get(`/api/tags/${id}`);
     return res.Blogs;
   },
+  async searchByTitleOrAuthor(keyword) {
+    const res = await axios.get('/api/search', {
+      params: { keyword },
+    });
+    return res;
+  },
 };
 
 // (async () => {
