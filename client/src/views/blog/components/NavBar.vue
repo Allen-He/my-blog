@@ -173,9 +173,7 @@ export default {
       color: #7f7f7f;
       cursor: pointer;
       margin-right: 24px;
-      &:hover {
-        color: #3eaf7c;
-      }
+      color: #3eaf7c;
     }
   }
 }
