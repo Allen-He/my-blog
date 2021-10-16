@@ -1,5 +1,12 @@
 <template>
-  <div class="categoryCard" @click="clickHandle">
+  <div
+    class="categoryCard"
+    @click="clickHandle"
+    :class="{
+      hoverChange: hoverBgChange,
+      active: isActive
+    }"
+  >
     <span class="name">{{ categoryName }}</span>
     <div class="num" :style="{ backgroundColor: numBgColor }">
       <span>{{ blogsNum }}</span>
@@ -19,6 +26,14 @@ export default {
     blogsNum: { // 该种类对应的博客数量
       type: Number,
       required: true,
+    },
+    hoverBgChange: { // 如果为true，则该卡片hover时的状态会不同于为false时的状态
+      type: Boolean,
+      default: false,
+    },
+    isActive: { // 如果为true，可以增加该卡片的被选中状态
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -77,6 +92,22 @@ export default {
     transform: scale(1.04);
     .name {
       color: #3eaf7c;
+    }
+  }
+  &.hoverChange {
+    &:hover {
+      transform: scale(1);
+      background-color: #3eaf7c;
+      .name {
+        color: #fff;
+      }
+    }
+  }
+  &.active {
+    transform: scale(1);
+    background-color: #3eaf7c;
+    .name {
+      color: #fff;
     }
   }
 }

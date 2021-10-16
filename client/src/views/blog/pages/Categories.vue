@@ -5,6 +5,9 @@
         v-if="categoryArr"
         :categoryArr="categoryArr"
         :showInline="true"
+        :hoverBgChange="true"
+        :existActive="true"
+        :curActiveId="categoryId"
       />
     </div>
     <div class="blogsBox">

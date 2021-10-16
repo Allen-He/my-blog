@@ -6,6 +6,8 @@
       :key="item.id"
       :categoryName="item.categoryName"
       :blogsNum="item.blogsNum"
+      :hoverBgChange="hoverBgChange"
+      :isActive="isActive(item.id)"
       @click="clickCategoryHandle(item.id)"
     />
   </div>
@@ -34,8 +36,23 @@ export default {
       type: Boolean,
       default: false,
     },
+    hoverBgChange: { // 是否改变hover时的动效
+      type: Boolean,
+      default: false,
+    },
+    existActive: { // 是否存在被选中的状态
+      type: Boolean,
+      default: false,
+    },
+    curActiveId: { // 当前状态为active的卡片的id（curActiveId需要和existActive配合使用，才能生效）
+      type: Number,
+      default: null,
+    },
   },
   methods: {
+    isActive(id) {
+      return this.existActive && this.curActiveId === id;
+    },
     clickCategoryHandle(id) {
       this.$router.push({
         name: 'Categories',
