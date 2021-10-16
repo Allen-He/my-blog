@@ -1,6 +1,7 @@
 <template>
   <div
     class="tagCard"
+    :class="{ active: isActive }"
     :style="{ backgroundColor: tagBgColor }"
     @click="clickHandle"
   >
@@ -16,6 +17,10 @@ export default {
     tagName: {
       type: String,
       required: true,
+    },
+    isActive: { // 是否被选中
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -42,7 +47,7 @@ export default {
   display: inline-block;
   box-sizing: border-box;
   height: 22px;
-  margin: 4px 4px 10px;
+  margin: 4px 5px 10px;
   padding: 4px 8px;
   border-radius: 4px;
   color: #fff;
@@ -56,6 +61,9 @@ export default {
 
   &:hover {
     transform: scale(1.04);
+  }
+  &.active {
+    transform: scale(1.2);
   }
 }
 </style>

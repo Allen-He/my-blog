@@ -1,7 +1,12 @@
 <template>
   <div class="tags">
     <div class="tagsBox">
-      <TagPanel v-if="tagArr" :tagArr="tagArr" />
+      <TagPanel
+        v-if="tagArr"
+        :tagArr="tagArr"
+        :existActive="true"
+        :curActiveId="tagId"
+      />
     </div>
     <div class="blogsBox">
       <BlogTitleList
