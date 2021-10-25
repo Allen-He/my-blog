@@ -52,6 +52,11 @@ const routes = [
     name: 'Login',
     component: () => import('../views/admin/Login.vue'),
   },
+  {
+    path: '/adminHome',
+    name: 'AdminHome',
+    component: () => import('../views/admin/AdminHome.vue'),
+  },
 ];
 
 // 解决重复点击路由报错的问题

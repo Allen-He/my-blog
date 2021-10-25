@@ -1,10 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import loginUser from './loginUser';
 import blogApi from '../request/blogApi';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  modules: {
+    loginUser,
+  },
   state: {
     categoryArr: null, // 文章分类
     tagArr: null, // 文章标签
@@ -52,7 +56,5 @@ export default new Vuex.Store({
       }));
       commit('setFriendArr', resArr);
     },
-  },
-  modules: {
   },
 });
