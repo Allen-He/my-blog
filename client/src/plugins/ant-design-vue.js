@@ -7,6 +7,7 @@ import {
   Button,
   Menu,
   Icon,
+  Popover,
 } from 'ant-design-vue';
 
 Vue.use(Pagination);
@@ -16,3 +17,4 @@ Vue.use(Input);
 Vue.use(Button);
 Vue.use(Menu);
 Vue.use(Icon);
+Vue.use(Popover);

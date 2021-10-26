@@ -25,7 +25,9 @@
         </a-sub-menu>
       </a-menu>
     </header>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
