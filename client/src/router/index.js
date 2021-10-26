@@ -56,10 +56,29 @@ const routes = [
   {
     path: '/adminHome',
     name: 'AdminHome',
+    redirect: { name: 'AddBlog' },
     component: () => import('../views/admin/AdminHome.vue'),
     meta: {
       needLogin: true,
     },
+    children: [
+      {
+        path: 'addBlog',
+        name: 'AddBlog',
+        component: () => import('../views/admin/pages/AddBlog.vue'),
+        meta: {
+          needLogin: true,
+        },
+      },
+      {
+        path: 'updateBlog',
+        name: 'UpdateBlog',
+        component: () => import('../views/admin/pages/UpdateBlog.vue'),
+        meta: {
+          needLogin: true,
+        },
+      },
+    ],
   },
 ];
 
