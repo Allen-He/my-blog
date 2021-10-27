@@ -14,8 +14,9 @@ router.post('/login', asyncHandler(async (req, res, next) => {
   if(data) { //登陆成功，发布token（包含当前admin对应的id）
     const idVal = data.id;
     jwt.publish(res, undefined, { id: idVal });
-    // 过滤敏感数据（密码）再返回
+    // 过滤敏感数据（密码、id）再返回
     delete data.loginPwd;
+    delete data.id;
   }
   return data;
 }));
@@ -23,8 +24,9 @@ router.post('/login', asyncHandler(async (req, res, next) => {
 router.get('/whoami', asyncHandler(async (req, res, next) => {
   const data = await adminServ.getAdminById(req.userId); //req.userId是由tokenMiddleware添加的属性，即：当前登录用户对应的id
   if(data) {
-    // 过滤敏感数据（密码）再返回
+    // 过滤敏感数据（密码、id）再返回
     delete data.loginPwd;
+    delete data.id;
   }
   return data;
 }));
