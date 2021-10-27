@@ -1,5 +1,8 @@
 <template>
-  <div class="blogTitleCard" @click="clickCardHandle">
+  <div
+    :class="['blogTitleCard', { showInBlogDetail }]"
+    @click="clickCardHandle"
+  >
     <h1 class="title">{{ title }}</h1>
     <ul class="info">
       <li class="author">
@@ -9,6 +12,10 @@
       <li class="creatTime">
         <i class="iconfont">&#xe63b;</i>
         <span class="time">{{ localCTime }}</span>
+      </li>
+      <li class="views" v-if="showViews">
+        <a-icon type="eye" theme="filled" style="margin-right: 8px;" />
+        <span class="time">{{ views }}</span>
       </li>
       <li class="tags" v-if="showTags">
         <i class="iconfont">&#xe605;</i>
@@ -26,10 +33,12 @@
 <script>
 export default {
   props: {
+    showInBlogDetail: { type: Boolean, default: false }, // 是否是在博客详情页中展示
     title: { type: String, required: true },
     from: { type: Boolean, required: true },
     author: { type: String, required: true },
     ctime: { type: String, required: true },
+    views: { type: Number, default: -1 },
     // CategoryId: { type: Number, required: true },
     Tags: {
       /**
@@ -42,6 +51,9 @@ export default {
     },
   },
   computed: {
+    showViews() {
+      return this.views >= 0;
+    },
     showTags() {
       return this.Tags && this.Tags.length !== 0;
     },
@@ -126,9 +138,30 @@ export default {
 
       &.tags .tag {
         margin-right: 8px;
+        cursor: pointer;
         &:hover {
           color: #3eaf7c;
         }
+      }
+    }
+  }
+
+  &.showInBlogDetail {
+    box-shadow: none;
+    cursor: default;
+    &:hover {
+      box-shadow: none;
+    }
+    .title {
+      margin-bottom: 8px;
+      font-size: 25px;
+      cursor: text;
+      &::after {
+        display: none;
+      }
+
+      &:hover {
+        color: #242424;
       }
     }
   }

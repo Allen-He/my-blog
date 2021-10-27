@@ -41,6 +41,10 @@ const api = {
     });
     return res;
   },
+  async getBlogById(id) {
+    const res = await axios.get(`/api/blogs/${id}`);
+    return res;
+  },
 };
 
 // (async () => {

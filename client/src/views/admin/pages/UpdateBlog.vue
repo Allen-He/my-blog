@@ -1,6 +1,8 @@
 <template>
   <div class="updateBlog">
-    编辑博客
+    <a-alert message="该页功能待开发" type="warning" :banner="true" :closable="true" />
+    <br>
+    <center>编辑博客</center>
   </div>
 </template>
 

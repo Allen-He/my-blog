@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import './theme/typora-lark.css';
+import '@/assets/mdTheme/typora-lark.css';
 import 'highlight.js/styles/github.css';
 import markdownIt from 'markdown-it';
 import hljs from 'highlight.js';
