@@ -1,5 +1,5 @@
 <template>
-  <div class="markdownEditor">
+  <div class="markdownEditor" ref="markdownEditor" @fullscreenchange="screenchangeHandle">
     <div class="toolBar">
       <ul class="toolList">
         <a-popover @click="addFormat('bold')">
@@ -48,7 +48,7 @@
         </a-popover>
       </ul>
       <ul class="btnList">
-        <li>预览</li>
+        <li @click="fullScreenHandle">{{ fullScreenText }}</li>
         <span>&nbsp;|&nbsp;</span>
         <li @click="submitHandle">提交</li>
       </ul>
@@ -99,7 +99,13 @@ export default {
       htmlVal: '',
       whichScroll: 0, // 0: none; 1: 编辑区主动触发滚动; 2: 展示区主动触发滚动
       scrollTimer: null,
+      isFullScreen: false, // 编辑器是否处于“全屏”状态
     };
+  },
+  computed: {
+    fullScreenText() {
+      return this.isFullScreen ? '退出全屏' : '全屏';
+    },
   },
   methods: {
     parseHandle() {
@@ -108,8 +114,8 @@ export default {
     /** 使目标元素driveDom按照比例scale进行滚动 */
     driveScroll(scale, driveDom) {
       const eleDom = driveDom;
-      const { scrollHeight } = eleDom;
-      eleDom.scrollTop = scrollHeight * scale;
+      const { scrollHeight, clientHeight } = eleDom;
+      eleDom.scrollTop = (scrollHeight - clientHeight) * scale;
 
       if (this.scrollTimer) {
         clearTimeout(this.scrollTimer);
@@ -190,8 +196,26 @@ export default {
     },
     // ------------------btnList: clickHandle------------------
     submitHandle() {
+      // 若当前处于全屏模式，则先退出
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      }
       // 点击提交按钮，触发submit事件，供父组件监听处理
       this.$emit('submit', this.mdVal);
+    },
+    fullScreenHandle() {
+      if (this.isFullScreen) { // 退出全屏
+        document.exitFullscreen();
+      } else { // 进入全屏
+        this.$refs.markdownEditor.requestFullscreen();
+      }
+    },
+    screenchangeHandle() {
+      if (document.fullscreenElement) { // 已经进入全屏模式
+        this.isFullScreen = true;
+      } else { // 已经退出全屏模式
+        this.isFullScreen = false;
+      }
     },
   },
 };
@@ -201,6 +225,7 @@ export default {
 .markdownEditor{
   width: 100%;
   height: 100%;
+  background-color: #fff;
 
   .toolBar {
     width: 100%;
@@ -252,7 +277,7 @@ export default {
       box-sizing: border-box;
       padding: 20px 20px 40px;
       border: none;
-      border-right: 1px solid rgb(238, 238, 238);
+      border-right: 2px solid rgb(238, 238, 238);
       background-color: rgb(248, 248, 250);
       font-size: 16px;
       outline: none;
@@ -268,6 +293,7 @@ export default {
       font-size: 15px;
       overflow: auto;
       position: relative;
+      word-break: break-all;
     }
   }
 }
