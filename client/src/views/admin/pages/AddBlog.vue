@@ -1,20 +1,36 @@
 <template>
   <div class="addBlog">
     <MarkdownEditor @submit="submitHandle" />
+    <InfoModel
+      :visible="modelVisible"
+      @close="modelCloseHandle"
+      :content="blogContent"
+    />
   </div>
 </template>
 
 <script>
 import MarkdownEditor from '../components/mdEdit/MarkdownEditor.vue';
+import InfoModel from '../components/InfoModel.vue';
 
 export default {
   components: {
     MarkdownEditor,
+    InfoModel,
+  },
+  data() {
+    return {
+      modelVisible: false,
+      blogContent: '',
+    };
   },
   methods: {
-    submitHandle(e) {
-      // TODO: 上传blog（弹出模态框，完善相关信息，再上传）
-      console.log(e);
+    submitHandle(mdVal) {
+      this.modelVisible = true;
+      this.blogContent = mdVal;
+    },
+    modelCloseHandle() {
+      this.modelVisible = false;
     },
   },
 };

@@ -30,7 +30,7 @@ export default {
     from: { type: Boolean, required: true },
     author: { type: String, required: true },
     ctime: { type: String, required: true },
-    CategoryId: { type: Number, required: true },
+    // CategoryId: { type: Number, required: true },
     Tags: {
       /**
        * 数组项 --- 属性

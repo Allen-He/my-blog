@@ -49,7 +49,11 @@ router.post('/', asyncHandler(async (req, res, next) => {
     CategoryId,
     Tags
   });
-  return data;
+  return {
+    title: data.title,
+    author: data.author,
+    ctime: data.ctime,
+  };
 }));
 
 // 修改单个blog（修改成功返回1，失败返回0）
