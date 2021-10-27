@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/blog/Home.vue';
-import store from '../store/index';
 
 Vue.use(VueRouter);
 
@@ -94,23 +93,18 @@ const router = new VueRouter({
   routes,
 });
 
-// 使用全局解析守卫（使用beforeEach被触发时，App.vue中的mounted钩子函数还没执行，即未请求whoami接口进行登录验证，故此时的userData始终为null。）
-// 该beforeResolve守卫中的回调执行的时间介于：App.vue的mounted 和 需要登录才能访问的xxx.vue的beforeCreated 之间
-router.beforeResolve((to, from, next) => {
-  const { userData } = store.state.loginUser;
-  if (to.meta.needLogin) {
-    if (userData) { // 如果已登录，按正常逻辑跳转到需要登录权限的页面
-      next();
-    } else { // 否则，跳转到登录页Login
-      next({ name: 'Login' });
-    }
+// beforeEach被触发时，App.vue中的mounted钩子函数还没执行，即未请求whoami接口进行登录验证，故此时的userData始终为null。
+// beforeResolve守卫中的回调执行的时间介于：App.vue的mounted 和 需要登录才能访问的xxx.vue的beforeCreated 之间。但晚于beforeEach。
+// 此处通过localStorage来判断是否登录，则可以避免上述问题的出现
+router.beforeEach((to, from, next) => {
+  const userData = localStorage.getItem('userData');
+  if (to.meta.needLogin && !userData) {
+    // 如果未登录，跳转到登录页Login；否则，按照正常逻辑处理
+    next({ name: 'Login' });
   }
-  if (to.name === 'Login') {
-    if (userData) { // 如果已登录，则跳转到管理员首页AdminHome
-      next({ name: 'AdminHome' });
-    } else { // 否则，按正常逻辑跳转到Login
-      next();
-    }
+  if (to.name === 'Login' && userData) {
+    // 如果已登录，则跳转到管理员首页AdminHome；否则，按正常逻辑跳转到Login
+    next({ name: 'AdminHome' });
   }
   next();
 });

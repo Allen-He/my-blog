@@ -15,6 +15,8 @@ export default {
     async setUserData({ commit }, { loginId, loginPwd }) {
       const resp = await loginApi.login(loginId, loginPwd);
       commit('setUserData', resp);
+      // 登录成功后，将接口返回的userData备份到localStorage中，用于后续路由跳转鉴权
+      localStorage.setItem('userData', JSON.stringify(resp));
       return resp;
     },
     async whoAmI({ commit }) {
@@ -27,6 +29,8 @@ export default {
     },
     async logout({ commit }) {
       commit('setUserData', null);
+      // 退出登录后，将备份到localStorage的userData清空
+      localStorage.removeItem('userData');
       await loginApi.logout();
     },
   },
