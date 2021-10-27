@@ -142,6 +142,10 @@ export default {
           const res = await adminApi.addBlog(title, from, author, content, categoryId, tags);
           if (res) { // 如果文章添加成功，跳转到博客首页
             this.$emit('close'); // 提交成功，触发close事件
+            // 清空state中的category和ArrtagArr状态，这样跳转到其他页面之后，能够自动获取最新的数据
+            this.$store.commit('setCategoryArr', null);
+            this.$store.commit('setTagArr', null);
+            // 跳转到首页
             this.$router.push('/');
           }
         } catch (err) {
