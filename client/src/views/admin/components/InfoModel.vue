@@ -37,9 +37,9 @@
             <a-radio :value="0">转载</a-radio>
           </a-radio-group>
         </a-form-model-item>
-        <a-form-model-item label="种类" prop="categories">
+        <a-form-model-item label="种类" prop="categoryId">
           <a-select
-            v-model="blogInfoForm.categories"
+            v-model="blogInfoForm.categoryId"
             style="width: 100%"
             placeholder="请选择文章的种类"
             option-label-prop="label"
@@ -101,7 +101,7 @@ export default {
         title: '',
         author: '继续努力就好',
         from: 1, // 1: 原创 | 0: 转载
-        categories: [],
+        categoryId: [],
         tags: [],
       },
       rules: {
@@ -116,7 +116,7 @@ export default {
         from: [
           { required: true, message: '请选择文章的 来源', trigger: 'blur' },
         ],
-        categories: [
+        categoryId: [
           { required: true, message: '请选择文章的 种类', trigger: 'blur' },
         ],
         tags: [
@@ -132,14 +132,14 @@ export default {
     ...mapActions(['setCategoryArr', 'setTagArr']),
     async submitHandle() {
       const {
-        title, from, author, categories, tags,
+        title, from, author, categoryId, tags,
       } = this.blogInfoForm;
 
       const content = this.content.trim();
       if (content !== '') {
         try {
           this.confirmLoading = true; // 状态改为：正在提交
-          const res = await adminApi.addBlog(title, from, author, content, categories[0], tags);
+          const res = await adminApi.addBlog(title, from, author, content, categoryId, tags);
           if (res) { // 如果文章添加成功，跳转到博客首页
             this.$emit('close'); // 提交成功，触发close事件
             this.$router.push('/');
