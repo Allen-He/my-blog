@@ -29,6 +29,9 @@
           <a-button style="margin-left: 15px;" @click="resetForm">
             重置
           </a-button>
+          <a-button type="dashed" style="margin-left: 15px;" @click="backHomeHandle">
+            回到首页
+          </a-button>
         </div>
       </a-form-model>
     </div>
@@ -82,6 +85,9 @@ export default {
     },
     resetForm() {
       this.$refs.loginForm.resetFields();
+    },
+    backHomeHandle() {
+      this.$router.push({ name: 'Index' });
     },
   },
 };

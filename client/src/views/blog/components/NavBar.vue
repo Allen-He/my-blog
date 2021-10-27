@@ -1,7 +1,7 @@
 <template>
   <header class="navBar">
     <a class="left" href="/">
-      <img class="logo" src="@/assets/logo.png" alt="">
+      <img @click="toAdminHandle" class="logo" src="@/assets/logo.png" alt="">
       <span class="siteName">{{ websiteTitle }}</span>
     </a>
     <div class="right">
@@ -66,6 +66,8 @@ export default {
       searchVal: '',
       titleArr: null,
       lastTime: 0, // 为搜索框的输入做“节流”处理
+      rootNum: 0, // 记录“请求进入管理员界面”的次数
+      lastRoot: 0, // 记录上一次“请求进入管理员界面”的时间
     };
   },
   computed: {
@@ -100,6 +102,20 @@ export default {
     searchItemClickHandle() {
       this.titleArr = null; // 点击搜索结果项后，重置titleArr，以隐藏searchpanel面板
       this.searchVal = '';
+    },
+    toAdminHandle(e) {
+      e.preventDefault();
+      const nowTime = Date.now();
+      if (nowTime - this.lastRoot < 500) { // 连续点击才有效（间隔为500毫秒，视为连续点击）
+        this.rootNum += 1;
+        if (this.rootNum === 3) {
+          this.rootNum = 0; // 重置rootNum
+          this.$router.push({ name: 'AdminHome' });
+        }
+      } else {
+        this.rootNum = 0;
+      }
+      this.lastRoot = nowTime;
     },
   },
 };

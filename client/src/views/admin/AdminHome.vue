@@ -14,6 +14,12 @@
             <span>编辑</span>
           </router-link>
         </a-menu-item>
+        <a-menu-item key='home'>
+          <router-link :to="{ name: 'Index' }">
+            <a-icon type="home" />
+            <span>首页</span>
+          </router-link>
+        </a-menu-item>
         <a-sub-menu key='user' class="userBox">
           <span slot="title" class="submenu-title-wrapper">
             <a-icon type="user"/>
