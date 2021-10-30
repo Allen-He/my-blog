@@ -27,14 +27,14 @@
   --rawblock-edit-panel-bd: #f5f6f7;
   --window-border: 0 solid white;
   --control-text-color: #1f2329;
-  --primary-color: #3370ff;
-  --primary-btn-border-color: #3370ff;
-  --active-file-border-color: #3370ff;
-  --primary-btn-text-color: #3370ff;
-  --item-hover-text-color: #3370ff;
-  --meta-content-color: #3370ff;
-  --search-select-text-color: #3370ff;
-  --heading-char-color: #3370ff;
+  --primary-color: #3eaf7c;
+  --primary-btn-border-color: #3eaf7c;
+  --active-file-border-color: #3eaf7c;
+  --primary-btn-text-color: #3eaf7c;
+  --item-hover-text-color: #3eaf7c;
+  --meta-content-color: #3eaf7c;
+  --search-select-text-color: #3eaf7c;
+  --heading-char-color: #3eaf7c;
   /* Mermaid diagrams*/
   --mermaid-theme: default;
 }
@@ -141,6 +141,7 @@
 }
 #write li {
   word-wrap: break-all;
+  position: relative;
 }
 #write li + li {
   margin-top: 4px;
@@ -153,7 +154,7 @@
   list-style-type: none;
 }
 #write a {
-  color: #3370ff;
+  color: #3eaf7c;
   text-decoration: underline;
 }
 #write a img {
@@ -245,18 +246,21 @@
   display: block;
   margin-left: 0;
   padding-left: 14px;
-  border-left: 2px solid #3370ff;
+  border-left: 4px solid #3eaf7c;
   color: rgba(31, 35, 41, 0.7);
 }
 #write code {
-  border-radius: 4px;
+  border-radius: 6px;
   margin-left: 2px;
   margin-right: 2px;
   border: 1px solid #dee0e3;
-  background-color: #f5f6f7;
+  /* background-color: #f5f6f7; */
   word-spacing: normal;
   line-height: 1.6;
-  padding: 0 2px;
+  padding: 12px;
+}
+#write code::-webkit-scrollbar {
+  display: none;
 }
 #write a {
   overflow-wrap: break-word;
@@ -290,7 +294,7 @@
   position: absolute;
   top: 2px;
   content: "•";
-  color: #3370ff;
+  color: #3eaf7c;
   display: inline-block;
   margin-left: -20px;
   margin-right: 20px;
@@ -323,7 +327,7 @@
 #write ol > li:not([class*=task-list-item]):before {
   content: counter(ol_counter) ".";
   counter-increment: ol_counter;
-  color: #3370ff;
+  color: #3eaf7c;
   position: absolute;
   margin-left: -22px;
   margin-right: 4px;
@@ -372,7 +376,7 @@
   box-shadow: none;
 }
 #write .task-list-item > input:hover {
-  border-color: #3370ff;
+  border-color: #3eaf7c;
 }
 #write .task-list-item > input[checked]::before {
   content: "";
@@ -382,7 +386,7 @@
   height: 60%;
   width: 2px;
   transform: rotate(40deg);
-  background: #3370ff;
+  background: #3eaf7c;
 }
 #write .task-list-item > input[checked]::after {
   content: "";
@@ -392,9 +396,5 @@
   height: 30%;
   width: 2px;
   transform: rotate(-40deg);
-  background: #3370ff;
-}
-
-#write strong {
-  color: #245bdb;
+  background: #3eaf7c;
 }

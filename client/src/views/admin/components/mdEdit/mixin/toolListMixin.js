@@ -124,6 +124,9 @@ const toolListMixin = {
       eleA.href = URL.createObjectURL(fileBlob);
       eleA.click();
     },
+    changeMdTheme() {
+
+    },
   },
 };
 

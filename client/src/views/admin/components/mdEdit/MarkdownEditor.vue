@@ -41,10 +41,6 @@
             <input ref="inpPic" type="file" multiple v-show="false">
           </li>
         </a-popover>
-        <a-popover>
-          <template slot="content"><p>主题</p></template>
-          <li><a-icon type="bg-colors" /></li>
-        </a-popover>
         <a-dropdown>
           <li><a-icon type="dash" /></li>
           <a-menu slot="overlay">
@@ -84,8 +80,8 @@
 </template>
 
 <script>
-import '@/assets/mdTheme/typora-lark.css';
-import 'highlight.js/styles/github.css';
+import '@/assets/mdTheme/typora-lark-blue.css';
+import 'highlight.js/styles/github-dark-dimmed.css';
 import markdownIt from 'markdown-it';
 import hljs from 'highlight.js';
 import toolListMixin from './mixin/toolListMixin';

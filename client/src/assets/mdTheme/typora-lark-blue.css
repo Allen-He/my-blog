@@ -246,18 +246,22 @@
   display: block;
   margin-left: 0;
   padding-left: 14px;
-  border-left: 2px solid #3370ff;
+  border-left: 4px solid #3370ff;
   color: rgba(31, 35, 41, 0.7);
 }
+
 #write code {
-  border-radius: 4px;
+  border-radius: 6px;
   margin-left: 2px;
   margin-right: 2px;
   border: 1px solid #dee0e3;
-  background-color: #f5f6f7;
+  /* background-color: #f5f6f7; */
   word-spacing: normal;
   line-height: 1.6;
-  padding: 0 2px;
+  padding: 12px;
+}
+#write code::-webkit-scrollbar {
+  display: none;
 }
 #write a {
   overflow-wrap: break-word;

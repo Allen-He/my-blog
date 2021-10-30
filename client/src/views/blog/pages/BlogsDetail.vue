@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import '@/assets/mdTheme/typora-lark.css';
-import 'highlight.js/styles/github.css';
+import '@/assets/mdTheme/typora-lark-green.css';
+import 'highlight.js/styles/github-dark-dimmed.css';
 import markdownIt from 'markdown-it';
 import hljs from 'highlight.js';
 import blogApi from '@/request/blogApi';
