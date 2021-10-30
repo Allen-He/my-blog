@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 import Home from '../views/blog/Home.vue';
 
 Vue.use(VueRouter);
@@ -93,10 +95,15 @@ const router = new VueRouter({
   routes,
 });
 
+NProgress.configure({
+  showSpinner: false, // 隐藏加载环
+});
+
 // beforeEach被触发时，App.vue中的mounted钩子函数还没执行，即未请求whoami接口进行登录验证，故此时的userData始终为null。
 // beforeResolve守卫中的回调执行的时间介于：App.vue的mounted 和 需要登录才能访问的xxx.vue的beforeCreated 之间。但晚于beforeEach。
 // 此处通过localStorage来判断是否登录，则可以避免上述问题的出现
 router.beforeEach((to, from, next) => {
+  NProgress.start();
   const userData = localStorage.getItem('userData');
   if (to.meta.needLogin && !userData) {
     // 如果未登录，跳转到登录页Login；否则，按照正常逻辑处理
@@ -107,6 +114,9 @@ router.beforeEach((to, from, next) => {
     next({ name: 'AdminHome' });
   }
   next();
+});
+router.afterEach(() => {
+  NProgress.done();
 });
 
 export default router;

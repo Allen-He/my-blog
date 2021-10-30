@@ -14,3 +14,9 @@ export default {
   },
 };
 </script>
+
+<style lang="less">
+#nprogress .bar {
+  background-color: #3eaf7c !important;
+}
+</style>
