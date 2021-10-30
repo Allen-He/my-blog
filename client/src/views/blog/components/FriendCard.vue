@@ -51,6 +51,7 @@ export default {
     background-color: #fff;
     box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
     border-radius: 4px;
+    border: 1px solid #e8e8e8;
     font-size: 13px;
     color: #242424;
     position: relative;
@@ -65,7 +66,7 @@ export default {
       transform: translateY(-50%);
     }
     &:hover {
-      box-shadow: 1px 2px 16px 0 rgba(0, 0, 0, 0.12);
+      box-shadow: 2px 4px 16px 0 rgba(0, 0, 0, 0.12);
     }
   }
 }

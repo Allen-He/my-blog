@@ -5,7 +5,7 @@
       <span class="siteName">{{ websiteTitle }}</span>
     </a>
     <div class="right">
-      <div class="themeBox">
+      <div class="themeBox" @click="toggleDarkTheme">
         <i class="iconfont">&#xeae9;</i>
       </div>
       <div class="searchBox">
@@ -51,6 +51,11 @@
 </template>
 
 <script>
+import {
+  enable as enableDarkMode,
+  disable as disableDarkMode,
+  isEnabled as isDarkReaderEnabled,
+} from 'darkreader';
 import blogApi from '@/request/blogApi';
 import NavItem from './NavItem.vue';
 import SearchPanel from './SearchPanel.vue';
@@ -76,6 +81,13 @@ export default {
     },
   },
   methods: {
+    toggleDarkTheme() { // 切换黑暗主题
+      if (isDarkReaderEnabled()) {
+        disableDarkMode();
+      } else {
+        enableDarkMode();
+      }
+    },
     async searchBlogsHandle() {
       const { searchVal, lastTime } = this;
       if (searchVal === '') { // 如果为空，则重置titleArr，且不做后续处理
@@ -129,6 +141,7 @@ export default {
   padding: 0px 24px;
   box-sizing: border-box;
   background-color: #fff;
+  border: 1px solid #e8e8e8;
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);;
   position: fixed;
   top: 0;

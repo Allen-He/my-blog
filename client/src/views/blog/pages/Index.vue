@@ -148,6 +148,7 @@ export default {
         padding: 30px 15px;
         box-sizing: border-box;
         border-radius: 4px;
+        border: 1px solid #e8e8e8;
         box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
         margin-left: 15px;
         transition: all .3s;

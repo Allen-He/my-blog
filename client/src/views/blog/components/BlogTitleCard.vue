@@ -83,6 +83,7 @@ export default {
   box-sizing: border-box;
   padding: 16px 20px;
   border-radius: 4px;
+  border: 1px solid #e8e8e8;
   background-color: #fff;
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
   transition: all .5s;
@@ -147,6 +148,7 @@ export default {
   }
 
   &.showInBlogDetail {
+    border: none;
     box-shadow: none;
     cursor: default;
     &:hover {
