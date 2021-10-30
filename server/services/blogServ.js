@@ -13,7 +13,6 @@ exports.addBlog = async function(blogObj) {
     // 校验blogObj的属性CategoryId（可不传）
     if(CategoryId) {
       const catRes = await Category.findByPk(CategoryId);
-      console.log(catRes);
       if(!catRes) {
         throw new Error('属性CategoryId的值不合法（不存在）');
       }

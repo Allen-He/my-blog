@@ -34,9 +34,12 @@
           <template slot="content"><p>表格</p></template>
           <li><a-icon type="file-excel" /></li>
         </a-popover>
-        <a-popover>
-          <template slot="content"><p>图片</p></template>
-          <li><a-icon type="picture" /></li>
+        <a-popover @click="addPicture">
+          <template slot="content"><p>图片(最多支持同时插入3个)</p></template>
+          <li>
+            <a-icon type="picture" />
+            <input ref="inpPic" type="file" multiple v-show="false">
+          </li>
         </a-popover>
         <a-popover>
           <template slot="content"><p>主题</p></template>
@@ -77,6 +80,7 @@ import '@/assets/mdTheme/typora-lark.css';
 import 'highlight.js/styles/github.css';
 import markdownIt from 'markdown-it';
 import hljs from 'highlight.js';
+import toolListMixin from './mixin/toolListMixin';
 
 const md = markdownIt({
   // 设置代码高亮的配置
@@ -93,6 +97,7 @@ const md = markdownIt({
 });
 
 export default {
+  mixins: [toolListMixin],
   data() {
     return {
       mdVal: '',
@@ -139,60 +144,6 @@ export default {
         if (this.whichScroll === 0) this.whichScroll = 2;
         this.driveScroll(scale, this.$refs.edit);
       }
-    },
-    // ------------------toolList: clickHandle------------------
-    addFormat(type, special) {
-      const { selectionStart, selectionEnd } = this.$refs.edit;
-      let formatSplit = '';
-      let formatText = '';
-
-      if (special) { // orderList unorderList code
-        if (type === 'orderList') {
-          formatSplit = '1. ';
-          formatText = '有序列表';
-        } else if (type === 'unorderList') {
-          formatSplit = '- ';
-          formatText = '无序列表';
-        } else if (type === 'code') {
-          formatSplit = '```js\n';
-          formatText = '\n```';
-        }
-        if (selectionStart === selectionEnd) {
-          this.mdVal = `${this.mdVal.slice(0, selectionStart)}\n\n${formatSplit}${formatText}\n\n${this.mdVal.slice(selectionEnd)}`;
-        } else {
-          this.mdVal = `${this.mdVal.slice(0, selectionStart)}\n\n${formatSplit}${this.mdVal.slice(selectionStart, selectionEnd)}${formatText}\n\n${this.mdVal.slice(selectionEnd)}`;
-        }
-      } else { // bold italic deleteLine
-        if (type === 'bold') {
-          formatSplit = '**';
-          formatText = '加粗';
-        } else if (type === 'italic') {
-          formatSplit = '*';
-          formatText = '斜体';
-        } else if (type === 'deleteLine') {
-          formatSplit = '~~';
-          formatText = '删除线';
-        }
-        if (selectionStart === selectionEnd) {
-          this.mdVal = `${this.mdVal.slice(0, selectionStart)}${formatSplit}${formatText}${formatSplit}${this.mdVal.slice(selectionEnd)}`;
-        } else {
-          this.mdVal = `${this.mdVal.slice(0, selectionStart)}${formatSplit}${this.mdVal.slice(selectionStart, selectionEnd)}${formatSplit}${this.mdVal.slice(selectionEnd)}`;
-        }
-      }
-
-      this.parseHandle();
-    },
-    addLink() {
-      const { selectionEnd } = this.$refs.edit;
-      const linkStr = '[链接描述文字](url)';
-      this.mdVal = `${this.mdVal.slice(0, selectionEnd)} ${linkStr} ${this.mdVal.slice(selectionEnd)}`;
-      this.parseHandle();
-    },
-    addExcel() {
-      const { selectionEnd } = this.$refs.edit;
-      const excelStr = '\n|  |  |\n|---|---|\n|  |  |\n';
-      this.mdVal = `${this.mdVal.slice(0, selectionEnd)} ${excelStr} ${this.mdVal.slice(selectionEnd)}`;
-      this.parseHandle();
     },
     // ------------------btnList: clickHandle------------------
     submitHandle() {

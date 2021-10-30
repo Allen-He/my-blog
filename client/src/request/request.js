@@ -24,6 +24,9 @@ instance.interceptors.response.use((response) => {
   if (headers.authorization) {
     localStorage.setItem(BASE.TOKEN_NAME, headers.authorization);
   }
+  if (data.code !== 200) {
+    throw new Error(data.msg);
+  }
   return data.datas;
 }, (err) => {
   // 响应的时候，如果响应的消息码是403（没有token，token失效），在本地删除token

@@ -33,6 +33,8 @@ app.use('/api/tags', require('./api/tags'));
 app.use('/api/friends', require('./api/friends'));
 app.use('/api/blogs', require('./api/blogs'));
 app.use('/api/search', require('./api/search'));
+// 上传&下载文件
+app.use('/api/upload', require('./api/upload'));
 
 // "错误处理"中间件
 app.use(require('./middleware/errorMiddleware'));
