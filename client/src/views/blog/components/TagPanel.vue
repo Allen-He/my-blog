@@ -34,7 +34,7 @@ export default {
       default: false,
     },
     curActiveId: { // 当前状态为active的卡片的id（curActiveId需要和existActive配合使用，才能生效）
-      type: Number,
+      type: [Number, String],
       default: null,
     },
   },

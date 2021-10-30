@@ -44,7 +44,7 @@ export default {
   computed: {
     ...mapState(['categoryArr']),
     categoryId() {
-      return +this.$route.params.id; // 转化为number类型
+      return this.$route.params.id; // 转化为number类型
     },
     curPageBlogs() {
       // 用于在“前端侧”实现数据分页展示
