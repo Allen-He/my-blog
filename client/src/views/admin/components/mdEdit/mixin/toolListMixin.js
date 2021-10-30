@@ -57,6 +57,7 @@ const toolListMixin = {
       this.mdVal = `${this.mdVal.slice(0, selectionEnd)} ${excelStr} ${this.mdVal.slice(selectionEnd)}`;
       this.parseHandle();
     },
+    /** 插入图片 */
     addPicture() {
       const { inpPic } = this.$refs;
       inpPic.click();
@@ -88,6 +89,40 @@ const toolListMixin = {
         // 当第二次选择同一个文件，由于inpPic.value没有发生变化，无法触发change/onchange事件。需要手动清空inpPic.value
         inpPic.value = '';
       };
+    },
+    /** 导入md */
+    importMd() {
+      const { inpImportMd } = this.$refs;
+      inpImportMd.click();
+      inpImportMd.onchange = () => {
+        const mdFile = inpImportMd.files[0];
+        const isMd = /[\w\W]+.md$/g.test(mdFile.name);
+        if (!isMd) {
+          alert('必须导入markdown文件（后缀名为 .md）');
+          inpImportMd.value = '';
+          return;
+        }
+        const fileReader = new FileReader();
+        fileReader.readAsText(mdFile);
+        fileReader.onload = () => {
+          this.mdVal = fileReader.result;
+          this.parseHandle();
+          inpImportMd.value = '';
+        };
+      };
+    },
+    /** 导出md */
+    exportMd() {
+      if (this.mdVal.trim() === '') {
+        alert('导出markdown文件的内容不能为空');
+        return;
+      }
+      const fileName = `${Math.random().toString(36).slice(-6)}_${Date.now()}.md`;
+      const eleA = document.createElement('a');
+      eleA.download = fileName;
+      const fileBlob = new Blob([this.mdVal]);
+      eleA.href = URL.createObjectURL(fileBlob);
+      eleA.click();
     },
   },
 };

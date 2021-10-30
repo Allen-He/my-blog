@@ -12,6 +12,7 @@ import {
   Radio,
   Select,
   Alert,
+  Dropdown,
 } from 'ant-design-vue';
 
 Vue.use(Pagination);
@@ -26,3 +27,4 @@ Vue.use(Modal);
 Vue.use(Radio);
 Vue.use(Select);
 Vue.use(Alert);
+Vue.use(Dropdown);

@@ -45,10 +45,18 @@
           <template slot="content"><p>主题</p></template>
           <li><a-icon type="bg-colors" /></li>
         </a-popover>
-        <a-popover>
-          <template slot="content"><p>导入md</p><p>导出md</p></template>
+        <a-dropdown>
           <li><a-icon type="dash" /></li>
-        </a-popover>
+          <a-menu slot="overlay">
+            <a-menu-item>
+              <span @click="importMd">导入md</span>
+              <input ref="inpImportMd" type="file" v-show="false">
+            </a-menu-item>
+            <a-menu-item>
+              <span @click="exportMd">导出md</span>
+            </a-menu-item>
+          </a-menu>
+        </a-dropdown>
       </ul>
       <ul class="btnList">
         <li @click="fullScreenHandle">{{ fullScreenText }}</li>
