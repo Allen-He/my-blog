@@ -106,10 +106,12 @@ router.beforeEach((to, from, next) => {
   NProgress.start();
   const userData = localStorage.getItem('userData');
   if (to.meta.needLogin && !userData) {
+    NProgress.done();
     // 如果未登录，跳转到登录页Login；否则，按照正常逻辑处理
     next({ name: 'Login' });
   }
   if (to.name === 'Login' && userData) {
+    NProgress.done();
     // 如果已登录，则跳转到管理员首页AdminHome；否则，按正常逻辑跳转到Login
     next({ name: 'AdminHome' });
   }
