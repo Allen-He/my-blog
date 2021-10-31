@@ -45,7 +45,6 @@ export default {
   .box {
     display: inline-block;
     height: 28px;
-    line-height: 20px;
     padding: 4px 8px 4px 20px;
     margin: 4px 4px 10px;
     background-color: #fff;
@@ -53,6 +52,7 @@ export default {
     border-radius: 4px;
     border: 1px solid #e8e8e8;
     font-size: 13px;
+    line-height: 18px;
     color: #242424;
     position: relative;
     cursor: pointer;
