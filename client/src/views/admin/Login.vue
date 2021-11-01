@@ -46,8 +46,8 @@ export default {
   data() {
     return {
       loginForm: {
-        account: '18308365449',
-        password: 'hcx147852369',
+        account: '',
+        password: '',
       },
       rules: {
         account: [
