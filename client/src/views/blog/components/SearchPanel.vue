@@ -34,9 +34,6 @@ export default {
       this.$emit('onClick');
     },
   },
-  created() {
-    console.log(this.titleArr);
-  },
 };
 </script>
 

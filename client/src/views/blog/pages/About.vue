@@ -57,7 +57,6 @@
   .info {
     width: 60%;
     color: #242424;
-    animation: upToShow 1s 0.1s both;
     h2 {
       text-align: center;
       font-size: 18px;
@@ -93,17 +92,6 @@
             color: #3eaf7c;
           }
         }
-      }
-    }
-
-    @keyframes upToShow {
-      0% {
-        opacity: 0;
-        transform: translateY(35%);
-      }
-      100% {
-        opacity: 100%;
-        transform: translateY(0);
       }
     }
   }

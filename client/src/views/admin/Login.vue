@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 <template>
   <div class="login">
     <div class="formBox">
@@ -70,7 +71,7 @@ export default {
       if (res) { // 登录成功
         this.$router.push({ name: 'AdminHome' });
       } else { // 登录失败
-        console.log('账号或密码错误，请重新输入！');
+        alert('账号或密码错误，请重新输入！');
       }
     },
     onSubmit() {

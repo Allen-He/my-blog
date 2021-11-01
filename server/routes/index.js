@@ -2,14 +2,8 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const staticRoot = path.resolve(__dirname, '../public');
+const resourceRoot = path.resolve(__dirname, '../resource');
 
-// TODO: 使用该中间件后，后续的get类型的api请求的响应结果会有问题（待处理）
-// 处理“单页应用history模式”的中间件
-// const history = require('connect-history-api-fallback');
-// app.use(history());
-
-// 静态资源中间件（内置）
-app.use(express.static(staticRoot));
 // 解析“application/x-www-form-urlencoded”格式的请求体（内置）
 app.use(express.urlencoded({ extended: true }));
 // 解析“application/json”格式的请求体（内置）
@@ -35,6 +29,15 @@ app.use('/api/blogs', require('./api/blogs'));
 app.use('/api/search', require('./api/search'));
 // 上传&下载文件
 app.use('/api/upload', require('./api/upload'));
+
+// TODO: 使用该中间件后，后续的get类型的api请求的响应结果会有问题（解决方案：应放在处理api的中间件之后，静态资源中间件之前）
+// 处理“单页应用history模式”的中间件
+const history = require('connect-history-api-fallback');
+app.use(history());
+
+// 静态资源中间件（内置）- 应放在处理api的中间件之后
+app.use(express.static(staticRoot));
+app.use('/resource', express.static(resourceRoot)); // 处理“访问用户上传的静态资源”
 
 // "错误处理"中间件
 app.use(require('./middleware/errorMiddleware'));

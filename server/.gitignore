@@ -1,5 +1,5 @@
 .DS_Store
 node_modules
 logs
-public/resource/upload/*
-public/resource/download/*
+resource/upload/*
+resource/download/*

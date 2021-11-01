@@ -65,7 +65,6 @@ export default {
   methods: {
     async getCurBlog() {
       this.curBlog = await blogApi.getBlogById(this.blogId);
-      console.log(this.curBlog);
     },
     clickTagHandle(tagId) {
       this.$router.push({

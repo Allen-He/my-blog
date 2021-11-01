@@ -7,7 +7,7 @@ const path = require('path');
 // 在哪里存储文件？文件怎么命名？
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.resolve(__dirname, '../../public/resource/upload'));
+    cb(null, path.resolve(__dirname, '../../resource/upload'));
   },
   filename: function (req, file, cb) {
     const timeStamp = Date.now();

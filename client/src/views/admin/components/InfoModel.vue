@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 <template>
   <div class="infoModel">
     <a-modal
@@ -150,12 +151,12 @@ export default {
           }
         } catch (err) {
           // TODO: 提示框 待开发
-          console.error(`添加失败！请尝试更换现有文章标题（《${title}》）后再提交！`);
+          alert(`添加失败！请尝试更换现有文章标题（《${title}》）后再提交！`);
         }
         this.confirmLoading = false; // 状态改为：正在提交
       } else {
         // TODO: 提示框 待开发
-        console.error('文章内容不能为空');
+        alert('文章内容不能为空');
       }
     },
     async handleOk() {
