@@ -5,7 +5,7 @@
       <div class="content">
         <p>
           一个正在努力成长的前端开发小白，22届本科，电子商务专业，坐标四川成都。21年暑假，在“哈啰出行”前端开发岗实习，最终顺利拿到转正offer。
-          闲暇之余，喜欢浏览一些技术博客。喜欢阅读、听歌、追剧、睡懒觉。当然，跑步、打乒乓也少不了。
+          闲暇之余，经常浏览一些技术博客。喜欢阅读、听歌、追剧、跑步、打乒乓。
         </p>
       </div>
       <h2>技术栈</h2>
@@ -14,8 +14,8 @@
         <p>JS库：jQuery、mock、lodash、moment</p>
         <p>计算机基础：网络的相关知识（Ajax、跨域、本地化存储等）、数据结构与算法</p>
         <p>工程化：Webpack（基本使用、编译过程、性能优化等）、Babel、各种模块化标准、包管理工具、Git</p>
-        <p>前端框架：Vue全家桶（熟悉底层原理）、React（学习中...）</p>
-        <p>后端：NodeJS、Mysql、Sequelize、Express</p>
+        <p>前端框架：Vue全家桶（熟悉底层原理）、React全家桶（熟悉react-router、redux等的底层原理）</p>
+        <p>后端：NodeJS、Mysql、Sequelize、MongoDB、Mongoose、Express</p>
         <p>UI库：AntDesign、Vant</p>
       </div>
       <h2>项目经验</h2>
@@ -33,8 +33,11 @@
           <a-timeline-item color="#3eaf7c">
             <a href="https://github.com/Allen-He/my_vue" target="_blank">自行封装小型MVVM框架 2021-10</a>
           </a-timeline-item>
-          <a-timeline-item>
-            <a href="https://github.com/Allen-He/my-blog" target="_blank">全栈个人博客网站（NodeJS + Vue） 2021-10</a>
+          <a-timeline-item color="#3eaf7c">
+            <a href="http://hechunxu.tech" target="_blank">全栈个人博客网站（NodeJS + Vue） 2021-10</a>
+          </a-timeline-item>
+          <a-timeline-item color="#3eaf7c">
+            <a href="http://movie.hechunxu.tech" target="_blank">全栈电影后台管理系统（TS + React + Antd） 2022-02</a>
           </a-timeline-item>
         </a-timeline>
       </div>
