@@ -3,8 +3,9 @@
     <template v-if="titleArr.length !== 0">
       <li
         class="searchItem"
-        v-for="item in titleArr"
+        v-for="(item, i) in titleArr"
         :key="item.id"
+        :class="{active: activeIndex === i}"
         @click="clickHandle(item.id)"
       >
         <span class="title" v-html="item.title"></span>
@@ -24,14 +25,14 @@ export default {
       type: Array,
       required: true,
     },
+    activeIndex: {
+      Number,
+      default: -1,
+    }, // 用于配合父组件实现“按方向键选择”各项内容
   },
   methods: {
     clickHandle(id) {
-      this.$router.push({
-        name: 'BlogsDetail',
-        params: { id },
-      });
-      this.$emit('onClick');
+      this.$emit('onClick', id);
     },
   },
 };
@@ -62,7 +63,7 @@ export default {
     justify-content: space-between;
     align-items: center;
 
-    &:hover {
+    &.active, &:hover {
       color: #3eaf7c;
       background-color: #eaecef;
     }

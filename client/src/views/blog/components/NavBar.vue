@@ -15,10 +15,12 @@
           placeholder="标题 or 作者"
           v-model.trim="searchVal"
           @input="searchBlogsHandle"
+          @keydown="selectPanelsHandle"
         >
         <SearchPanel
           v-if="showSearchPanel"
           :titleArr="titleArr"
+          :activeIndex="curActiveIndex"
           @onClick="searchItemClickHandle"
         />
       </div>
@@ -73,6 +75,7 @@ export default {
       lastTime: 0, // 为搜索框的输入做“节流”处理
       rootNum: 0, // 记录“请求进入管理员界面”的次数
       lastRoot: 0, // 记录上一次“请求进入管理员界面”的时间
+      curActiveIndex: -1, // 实现“通过方向键选择搜索框的推荐项”功能
     };
   },
   computed: {
@@ -88,8 +91,32 @@ export default {
         enableDarkMode();
       }
     },
+    selectPanelsHandle(e) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (this.showSearchPanel && this.curActiveIndex === this.showSearchPanel.length - 1) {
+          this.curActiveIndex = -1;
+        } else {
+          this.curActiveIndex += 1;
+        }
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (this.showSearchPanel && this.curActiveIndex === -1) {
+          this.curActiveIndex = this.showSearchPanel.length - 1;
+        } else {
+          this.curActiveIndex -= 1;
+        }
+      }
+      if (e.key === 'Enter') {
+        const curTitle = this.titleArr && this.titleArr[this.curActiveIndex];
+        if (curTitle && curTitle.id !== undefined) {
+          this.searchItemClickHandle(curTitle.id);
+        }
+      }
+    },
     async searchBlogsHandle() {
       const { searchVal, lastTime } = this;
+      this.curActiveIndex = -1; // 重置curActiveIndex
       if (searchVal === '') { // 如果为空，则重置titleArr，且不做后续处理
         this.titleArr = null;
         return;
@@ -111,7 +138,11 @@ export default {
     replaceTargetVal(originVal, targetVal) {
       return originVal.replace(targetVal, `<span style="color: #3eaf7c">${targetVal}</span>`);
     },
-    searchItemClickHandle() {
+    searchItemClickHandle(id) {
+      this.$router.push({
+        name: 'BlogsDetail',
+        params: { id },
+      });
       this.titleArr = null; // 点击搜索结果项后，重置titleArr，以隐藏searchpanel面板
       this.searchVal = '';
     },
