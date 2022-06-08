@@ -14,6 +14,7 @@
         <span class="time">{{ lastUpdateTime }}</span>
       </div>
     </div>
+    <div class="commentsWrap" ref="commentsWrap"></div>
   </div>
 </template>
 
@@ -21,6 +22,7 @@
 import '@/assets/mdTheme/typora-lark-green.css';
 import 'highlight.js/styles/github-dark-dimmed.css';
 import markdownIt from 'markdown-it';
+import Valine from 'valine';
 import hljs from 'highlight.js';
 import blogApi from '@/request/blogApi';
 import BlogTitleCard from '../components/BlogTitleCard.vue';
@@ -64,7 +66,17 @@ export default {
   },
   methods: {
     async getCurBlog() {
+      // 获取curBlog数据
       this.curBlog = await blogApi.getBlogById(this.blogId);
+      // 加载评论区
+      this.$nextTick(() => {
+        const valine = new Valine();
+        valine.init({
+          el: '.commentsWrap',
+          appId: 'YVltSC5bOhmDMMM2F3fRL04z-gzGzoHsz',
+          appKey: 'yxSzKDH2ky55QFm4jfGxbhX7',
+        });
+      });
     },
     clickTagHandle(tagId) {
       this.$router.push({
@@ -118,6 +130,12 @@ export default {
         color: #3eaf7c;
       }
     }
+  }
+
+  .commentsWrap {
+    width: 860px;
+    padding: 0 20px;
+    margin-top: 20px;
   }
 }
 </style>

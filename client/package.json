@@ -15,6 +15,7 @@
     "highlight.js": "^11.3.1",
     "markdown-it": "^12.2.0",
     "nprogress": "^0.2.0",
+    "valine": "^1.4.18",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
@@ -34,6 +35,7 @@
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "vue-cli-plugin-ant-design": "~1.0.1",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "webpack-bundle-analyzer": "^4.5.0"
   }
 }

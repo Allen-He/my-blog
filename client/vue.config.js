@@ -1,4 +1,5 @@
 const path = require('path');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const outputDir = path.resolve(__dirname, '../server/public');
 
@@ -16,4 +17,7 @@ module.exports = {
   },
   publicPath: '/', // 防止npm run build后出现空白页面
   productionSourceMap: false,
+  configureWebpack: {
+    plugins: [new BundleAnalyzerPlugin()]
+  },
 };
