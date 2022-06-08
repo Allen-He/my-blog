@@ -17,7 +17,7 @@ module.exports = {
   },
   publicPath: '/', // 防止npm run build后出现空白页面
   productionSourceMap: false,
-  configureWebpack: {
-    plugins: [new BundleAnalyzerPlugin()]
-  },
+  // configureWebpack: {
+  //   plugins: [new BundleAnalyzerPlugin()] //TODO: 需配置为“仅在开发环境下生效”
+  // },
 };

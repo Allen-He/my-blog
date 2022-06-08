@@ -75,6 +75,7 @@ export default {
           el: '.commentsWrap',
           appId: 'YVltSC5bOhmDMMM2F3fRL04z-gzGzoHsz',
           appKey: 'yxSzKDH2ky55QFm4jfGxbhX7',
+          path: `blogsDetail_$$_${this.blogId}`,
         });
       });
     },
