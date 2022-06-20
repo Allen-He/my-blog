@@ -47,7 +47,7 @@ module.exports = {
           minRatio: 0.8, // 默认，只有压缩率优于 0.8 的资源才会被处理（Compressed Size / Original Size）
           deleteOriginalAssets: false // 是否删除原文件（默认为false）
         }),
-        new BundleAnalyzerPlugin() // TODO: 需在上线前注释掉
+        // new BundleAnalyzerPlugin() // TODO: 需在上线前注释掉
       );
     }
   }
