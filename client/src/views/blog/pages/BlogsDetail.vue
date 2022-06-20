@@ -23,7 +23,7 @@ import '@/assets/mdTheme/typora-lark-green.css';
 import 'highlight.js/styles/github-dark-dimmed.css';
 import markdownIt from 'markdown-it';
 import Valine from 'valine';
-import hljs from 'highlight.js';
+import hljs from 'highlight.js/lib/common';
 import blogApi from '@/request/blogApi';
 import BlogTitleCard from '../components/BlogTitleCard.vue';
 

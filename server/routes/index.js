@@ -1,6 +1,8 @@
 const express = require('express');
+const expressStaticGzip = require("express-static-gzip");
 const path = require('path');
 const app = express();
+
 const staticRoot = path.resolve(__dirname, '../public');
 const resourceRoot = path.resolve(__dirname, '../resource');
 
@@ -35,6 +37,8 @@ app.use('/api/upload', require('./api/upload'));
 const history = require('connect-history-api-fallback');
 app.use(history());
 
+// 开启Gzip压缩资源的响应
+app.use(expressStaticGzip(staticRoot));
 // 静态资源中间件（内置）- 应放在处理api的中间件之后
 app.use(express.static(staticRoot));
 app.use('/resource', express.static(resourceRoot)); // 处理“访问用户上传的静态资源”

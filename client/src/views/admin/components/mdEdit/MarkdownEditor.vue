@@ -83,7 +83,7 @@
 import '@/assets/mdTheme/typora-lark-blue.css';
 import 'highlight.js/styles/github-dark-dimmed.css';
 import markdownIt from 'markdown-it';
-import hljs from 'highlight.js';
+import hljs from 'highlight.js/lib/common';
 import toolListMixin from './mixin/toolListMixin';
 
 const md = markdownIt({
