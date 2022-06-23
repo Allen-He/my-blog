@@ -17,9 +17,12 @@ router.get('/all', asyncHandler(async (req, res, next) => {
   return data;
 }));
 
-// 查询单个blog（根据id）
+// 查询单个blog（根据id）—— 每查询一次对应文章的阅读量+1
 router.get('/:id', asyncHandler(async (req, res, next) => {
   const { id } = req.params;
+  console.log(req.headers);
+  const oldData = await blogServ.getBlogById(id);
+  await blogServ.updateBlog(id, {views: oldData.views + 1});
   const data = await blogServ.getBlogById(id);
   return data;
 }));
