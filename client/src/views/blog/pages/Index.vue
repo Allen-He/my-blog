@@ -89,8 +89,7 @@ export default {
       return this.blogsTotalNum;
     },
     pageViewsStr() {
-      const { pageViews } = this.extraInfo;
-      return pageViews.toLocaleString();
+      return this.extraInfo.pageViews.toLocaleString();
     }
   },
   methods: {
