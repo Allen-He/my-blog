@@ -47,13 +47,14 @@
         </div>
       </div>
     </div>
-    <FooterBar/>
+    <FooterBar :pageViews="extraInfo.pageViews" />
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
 import blogApi from '@/request/blogApi';
+import extraApi from '@/request/extraApi';
 import SectionTitle from '../components/SectionTitle.vue';
 import BlogTitleList from '../components/BlogTitleList.vue';
 import CategoryPanel from '../components/CategoryPanel.vue';
@@ -74,6 +75,9 @@ export default {
     return {
       curBlogsArr: null,
       blogsTotalNum: 0,
+      extraInfo: {
+        pageViews: 0, // 首页访问量
+      },
     };
   },
   computed: {
@@ -95,12 +99,17 @@ export default {
       this.curBlogsArr = data.datas;
       this.blogsTotalNum = data.total;
     },
+    async getExtraInfo() {
+      const { pageViews } = await extraApi.getExtra();
+      this.extraInfo.pageViews = pageViews;
+    },
   },
   created() {
     this.setCategoryArr();
     this.setTagArr();
     this.setFriendArr();
     this.getBlogsAndTotal();
+    this.getExtraInfo();
   },
 };
 </script>

@@ -14,13 +14,19 @@
     </div>
     <div class="item">
       <i class="iconfont">&#xe648;</i>
-      <span>99999</span>
+      <span>{{ pageViews }}</span>
     </div>
   </footer>
 </template>
 
 <script>
 export default {
+  props: {
+    pageViews: {
+      type: Number,
+      default: 0,
+    },
+  },
   data() {
     return {
       birthYear: 2021,
