@@ -47,7 +47,7 @@
         </div>
       </div>
     </div>
-    <FooterBar :pageViews="extraInfo.pageViews" />
+    <FooterBar :pageViews="pageViewsStr" />
   </div>
 </template>
 
@@ -88,6 +88,10 @@ export default {
     blogsNum() {
       return this.blogsTotalNum;
     },
+    pageViewsStr() {
+      const { pageViews } = this.extraInfo;
+      return pageViews.toLocaleString();
+    }
   },
   methods: {
     ...mapActions(['setCategoryArr', 'setTagArr', 'setFriendArr']),
