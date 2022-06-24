@@ -18,7 +18,7 @@
         </div>
         <div class="infoBox">
           <div class="info">
-            <img class="avator" src="~@/assets/logo.png" alt="" />
+            <img class="avator" src="@/assets/imgs/logo.png" alt="" />
             <h3 class="name">而已</h3>
             <div class="nums">
               <div class="numsItem">

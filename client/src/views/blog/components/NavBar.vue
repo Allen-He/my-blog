@@ -1,7 +1,7 @@
 <template>
   <header class="navBar">
     <a class="left" href="/">
-      <img @click="toAdminHandle" class="logo" src="@/assets/logo.png" alt="">
+      <img @click="toAdminHandle" class="logo" src="@/assets/imgs/logo.png" alt="">
       <span class="siteName">{{ websiteTitle }}</span>
     </a>
     <div class="right">
