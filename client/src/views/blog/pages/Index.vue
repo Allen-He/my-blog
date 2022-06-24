@@ -90,7 +90,7 @@ export default {
     },
     pageViewsStr() {
       return this.extraInfo.pageViews.toLocaleString();
-    }
+    },
   },
   methods: {
     ...mapActions(['setCategoryArr', 'setTagArr', 'setFriendArr']),
