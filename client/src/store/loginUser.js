@@ -19,12 +19,13 @@ export default {
       localStorage.setItem('userData', JSON.stringify(resp));
       return resp;
     },
-    async whoAmI({ commit }) {
+    async whoAmI({ commit, dispatch }) {
       try {
         const resp = await loginApi.whoAmI();
         commit('setUserData', resp);
       } catch (err) {
         commit('setUserData', null);
+        dispatch('logout'); // 没有权限，退出登录
       }
     },
     async logout({ commit }) {
