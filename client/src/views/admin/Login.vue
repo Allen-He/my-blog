@@ -19,6 +19,7 @@
         <a-form-model-item class="formItem" ref="password" label="密码" prop="password">
           <a-input
             class="inputBox"
+            type="password"
             v-model.trim="loginForm.password"
             @blur="() => { $refs.password.onFieldBlur(); }"
           />
