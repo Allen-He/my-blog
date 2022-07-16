@@ -16,6 +16,10 @@
       :hideOnSinglePage="true"
       @change="onChange"
     />
+    <a-empty v-if="blogsArr.length === 0">
+      <img slot="image" src="@/assets/imgs/empty.png" style="transform: scale(.6) translateY(30%)">
+      <div slot="description">暂无文章数据</div>
+    </a-empty>
   </div>
 </template>
 

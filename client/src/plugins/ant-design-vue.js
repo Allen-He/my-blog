@@ -13,6 +13,7 @@ import {
   Select,
   Alert,
   Dropdown,
+  Empty,
 } from 'ant-design-vue';
 
 Vue.use(Pagination);
@@ -28,3 +29,4 @@ Vue.use(Radio);
 Vue.use(Select);
 Vue.use(Alert);
 Vue.use(Dropdown);
+Vue.use(Empty);

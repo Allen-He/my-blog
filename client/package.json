@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "start": "npm run serve --fix",
     "serve": "vue-cli-service serve --watch",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "ant-design-vue": "^1.2.4",
+    "ant-design-vue": "^1.7.8",
     "axios": "^0.22.0",
     "core-js": "^3.6.5",
     "darkreader": "^4.9.39",

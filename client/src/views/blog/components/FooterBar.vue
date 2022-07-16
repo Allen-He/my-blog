@@ -2,7 +2,7 @@
   <footer class="footerBar">
     <div class="item">
       <i class="iconfont">&#xe608;</i>
-      <a href="https://vuepress-theme-reco.recoluan.com/" target="_blank">vuepress-theme-reco@1.6.6</a>
+      <a href="/" target="_blank">vuepress-theme-reco</a>
     </div>
     <div class="item">
       <i class="iconfont">&#xe7b7;</i>
